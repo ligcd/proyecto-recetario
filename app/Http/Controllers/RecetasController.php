@@ -17,11 +17,12 @@ class RecetasController extends Controller
     /**
      * Display a listing of the resource.
      */
-
+#NO OLVIDES PONERLO DE VUELTA
+#$this->middleware(['auth','verified'])->except('index','show'); 
      public function __construct()
      {
-         $this->middleware(['auth','verified'])->except('index','show');
-     }
+       $this->middleware(['auth'])->except('index','show');
+      } 
      
      public function index(Request $request)
      {

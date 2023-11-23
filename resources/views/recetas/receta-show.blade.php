@@ -82,6 +82,13 @@
               </ul>
             </div>
           </div>
+
+          <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+            <a href="{{ route('recetaimg.descarga', $receta) }}">
+            <a href="{{ route('recetas.descargar-pdf', $receta) }}" class="btn btn-primary">Descargar PDF</a>
+              <img src="{{ \Storage::url($receta->archivo_ubicacion) }}" alt="{{ $receta->titulo }}" class="img-fluid">
+            </a>
+          </div>
           
           <!-- ======== Imgen de la receta ======== -->
           <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
