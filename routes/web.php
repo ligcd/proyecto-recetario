@@ -5,6 +5,8 @@ use App\Http\Controllers\ComentariosController;
 use App\Http\Controllers\RecetasController;
 use App\Http\Controllers\MenuController;
 
+use App\Http\Controllers\PDFController;
+
 use Illuminate\Auth\Events\Verified;
 
 /*
@@ -26,6 +28,8 @@ Route::get('/inicio', [MenuController::class, 'inicio'])->middleware('auth','ver
 
 
 Route::get('recetaimg-descarga/{receta}', [RecetasController::class, 'descargar'])->name('recetaimg.descarga');
+
+Route::get('/recetas/{receta}/descargar-pdf', [PDFController::class, 'descargarRecetaPDF'])->name('recetas.descargar-pdf');
 
 Route::resource('ingredientes', IngredientesController::class); 
 
