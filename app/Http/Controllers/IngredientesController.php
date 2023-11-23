@@ -18,7 +18,7 @@ class IngredientesController extends Controller
 
         //dd($ingredientes);
         //Ingrediente::where ('nombre','Pepino')->get();
-        return view('ingredientes/ingrediente-index', compact('ingredientes'));
+        return view('recetas.listadoRecetas', compact('ingredientes'));
         
     }
 
@@ -28,7 +28,7 @@ class IngredientesController extends Controller
     public function create(Request $request)
     {
         $recetaId = $request->input('recetaId');
-        return view('ingredientes/ingrediente-create', compact('recetaId'));
+        return view('recetas/formularioRecetas', compact('recetaId'));
     }
     
     
@@ -46,7 +46,7 @@ class IngredientesController extends Controller
         
         Ingredientes::create($request->all());
     
-        return redirect()->route('recetas.index');
+        $recetaId = $request->input('recetas_id');
     }
 
     /**

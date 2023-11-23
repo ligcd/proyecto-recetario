@@ -125,7 +125,7 @@
                   </div>
                   
                   <div class="form-group mt-3">
-                    <textarea class="form-control" name="descripcion" rows="5" placeholder="Describe el platillo"></textarea>
+                    <textarea class="form-control" name="descripcion" rows="1" placeholder="Describe el platillo"></textarea>
                     <div class="validate"></div>
                   </div>
 
@@ -141,8 +141,54 @@
                       </select>
                   </div>
 
-                  <div class="text-center"><button type="submit">Crear</button></div>
+                  <div class="section-header ">
+                    <p style="font-size:50px;">Agregar <span>Ingrediente</span></p>
+                    <div class="text-center"><button type="button" id="btnAgregarIngredientes">Agregar ingredientes</button></div>
+                  </div>
+
+                  <div class="row gy-4 seccion-ingredientes">
+                  
+                  <input type="hidden" name="recetas_id" value="{{ $recetaId }}">
+                  <div class="col-md-6 ingrediente-bloque">
+                    <input type="text" name="nombre[]" class="form-control" id="nombre" placeholder="Nombre del Ingrediente">
+                    @error('nombre')
+                    <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="col-md-6">
+                    <input type="number" class="form-control" name="cantidad[]" step="0.100" id="cantidad" placeholder="Cantidad">
+                    @error('cantidad')
+                    <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="col-md-6">
+                    <select class="custom-select" name="unidadMedida[]" id="unidadMedida">
+                        <option value="">Selecciona una unidad de medida</option>
+                        <option value="Kg">Kilogramos (Kg)</option>
+                        <option value="gr">Gramos (gr)</option>
+                        <option value="ml">Mililitros (ml)</option>
+                        <option value="L">Litros (L)</option>
+                        <option value="lb">Libras (lb)</option>
+                        <option value="oz">Onzas (oz)</option>
+                        <option value="c/s">Cucharadas sopera (c/s)</option>
+                        <option value="c/c">Cucharaditas de postre (c/c)</option>
+                    </select>
+                    <span class="text-muted"style="margin-left:5px; font-size:10px;">(deja en blanco si es necesario)</span>
+                    @error('unidadMedida')
+                    <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
+                    @enderror
                 </div>
+                <div class="text-center"><button type="button" id="btnAgregarOtroIngrediente">Agregar otro</button></div>
+
+                </div>
+
+                <div class="form-group mt-3">
+                    <textarea class="form-control" name="procedimiento" rows="10" placeholder="Describe el procedimiento de elaboración del platillo"></textarea>
+                    <div class="validate"></div>
+                </div>
+                
+                  <div class="text-center"><button type="submit">Crear</button></div>
+
             </form>
           </div><!-- End Reservation Form -->
 
@@ -154,5 +200,25 @@
   </main><!-- End #main -->
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Ocultar la sección de ingredientes al cargar la página
+    $(".seccion-ingredientes").hide();
+
+    // Manejar el clic en el botón "Agregar ingredientes"
+    $("#btnAgregarIngredientes").click(function () {
+      // Mostrar la sección de ingredientes
+      $(".seccion-ingredientes").show();
+    });
+
+    // Manejar el clic en el botón "Agregar otro ingrediente"
+    $("#btnAgregarOtroIngrediente").click(function () {
+      // Clonar la última sección de ingredientes y agregarla después
+      $(".seccion-ingredientes:last").clone().insertAfter(".seccion-ingredientes:last");
+    });
+  });
+</script>
 
 </html>

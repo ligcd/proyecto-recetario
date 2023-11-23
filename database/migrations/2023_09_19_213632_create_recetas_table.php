@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('descripcion');
             $table->string('tipoComida');
+            $table->string('procedimiento');
             $table->string('archivo_ubicacion');
         });
     }

@@ -78,24 +78,33 @@
             </div>
           </div>
           <div>
-            <ul>
+            <h1>Ingredientes</h1>
+            <ol>
                 @foreach ($receta->ingredientes as $ingrediente)
                     <li>{{ $ingrediente->nombre}}</li>
                 @endforeach
-            </ul>
+            </ol>
           </div>
           <div>
+            <h1>Procedimiento</h1>
+            <p>{{$receta->procedimiento}}</p>
+          </div>
+          <div>
+            <h1>Comentarios</h1>
             <ul>
                 @foreach ($receta->comentarios as $c)
                     <li>{{ $c->comentario }}</li>
                 @endforeach
             </ul>
           </div>
-          <ul>
-              @foreach ($receta->etiquetas as $etiqueta)
-                  <li>{{ $etiqueta->etiqueta }}</li>
-              @endforeach
-          </ul>
+          <div>
+            <h1>Etiquetas</h1>
+            <ul>
+                @foreach ($receta->etiquetas as $etiqueta)
+                    <li>{{ $etiqueta->etiqueta }}</li>
+                @endforeach
+            </ul>
+          </div>
         </div>
         
         <!--<h4>Usuario que creó:  $receta->user->name }}</h4>-->

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Recetas;
 use App\Models\Etiqueta;
+use App\Models\Ingredientes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class RecetasController extends Controller
 {
@@ -47,7 +49,9 @@ class RecetasController extends Controller
     public function create()
     {
         $etiquetas = Etiqueta::all();
-        return view('recetas/formularioRecetas', compact('etiquetas'));
+        $recetaId = Ingredientes::all(); // O asigna el valor adecuado según tus necesidades.
+    
+        return view('recetas/formularioRecetas', compact('etiquetas', 'recetaId'));
     }
 
     /**
@@ -80,15 +84,41 @@ class RecetasController extends Controller
             'titulo' => $request->titulo,
             'tipoComida' => $request->tipoComida,
             'descripcion' => $request->descripcion,
+            'procedimiento' => $request->procedimiento,
             'archivo_ubicacion' => $archivoUbicacion,
             'user_id' => Auth::id(),
         ]);
-    
+
         // Array de etiquetas creadas y existentes.
         $etiquetasReceta = array_merge($etiquetasCreadas, Etiqueta::whereIn('id', $etiquetasSeleccionadas)->pluck('id')->toArray());
         $receta->etiquetas()->attach($etiquetasReceta);
+
+        $ingredientesNombres = $request->input('nombre', []);
+        $ingredientesCantidades = $request->input('cantidad', []);
+        $ingredientesUnidades = $request->input('unidadMedida', []);
+
+        $numeroIngredientes = is_array($ingredientesNombres) ? count($ingredientesNombres) : 0;
+
+        $ingredientes = [];
+
+        // Imprime o registra el valor de $receta->id
+        //Log::info("ID de la receta: {$receta->id}");
+        //dd($receta->id);
+
+        for ($i = 0; $i < $numeroIngredientes; $i++) {
+            $ingrediente = $receta->ingredientes()->create([
+                'nombre' => $ingredientesNombres[$i],
+                'cantidad' => $ingredientesCantidades[$i],
+                'unidad_medida' => $ingredientesUnidades[$i],
+            ]);
+        
+            $ingredientes[] = $ingrediente;
+        }
+        
+
+        return redirect()->route('recetas.index');
     
-        return redirect()->route('ingredientes.create', ['recetaId' => $receta->id]);
+        //return redirect()->route('ingredientes.create', ['recetaId' => $receta->id]);
     }
     
     public function show(Recetas $receta)
