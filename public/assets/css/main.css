@@ -1699,6 +1699,28 @@ section {
   background-position: center;
 }
 
+.ingrediente-bloque{
+  margin-bottom: 20px;
+}
+
+.add-ingredient{
+  display: flex;
+  justify-content: right;
+}
+
+.add-ingredient button[type="button"]{
+  background: none;
+  border: 0;
+  padding: 14px 20px;
+  color: var(--color-primary) ;
+  transition: 0.4s;
+  border-radius: 10px;
+}
+
+.add-ingredient button[type="button"]:hover{
+  font-weight: bolder;
+}
+
 .book-a-table .reservation-form-bg {
   background: rgba(55, 55, 63, 0.04);
 }
@@ -1774,27 +1796,24 @@ section {
 }
 
 .book-a-table .php-email-form input,
-.book-a-table .php-email-form textarea {
+.book-a-table .php-email-form textarea,
+.book-a-table .php-email-form select{
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
   border-radius: 0;
+  padding: 12px 15px;
 }
 
 .book-a-table .php-email-form input:focus,
-.book-a-table .php-email-form textarea:focus {
+.book-a-table .php-email-form textarea:focus, 
+.book-a-table .php-email-form select:focus {
   border-color: var(--color-primary);
 }
 
-.book-a-table .php-email-form input {
-  padding: 12px 15px;
-}
 
-.book-a-table .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.book-a-table .php-email-form button[type=submit] {
+.book-a-table .php-email-form button[type=submit],
+.book-a-table .php-email-form a {
   background: var(--color-primary);
   border: 0;
   padding: 14px 60px;
@@ -1803,7 +1822,8 @@ section {
   border-radius: 50px;
 }
 
-.book-a-table .php-email-form button[type=submit]:hover {
+.book-a-table .php-email-form button[type=submit]:hover
+.book-a-table .php-email-form a:hover {
   background: #ec2727;
 }
 

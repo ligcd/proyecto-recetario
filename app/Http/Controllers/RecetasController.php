@@ -9,6 +9,7 @@ use App\Models\Ingredientes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class RecetasController extends Controller
 {
@@ -63,6 +64,7 @@ class RecetasController extends Controller
             'titulo' => 'required|regex:/^[\pL\s\-]+$/u|max:150',
             'tipoComida' => 'required|regex:/^[\pL\s\-]+$/u|max:100',
             'descripcion' => 'required|string|max:1000',
+            'procedimiento' => 'required|string|max:10000', // Ajusta el número según tus necesidades
             'archivo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:10000',
         ]);
     
@@ -106,12 +108,31 @@ class RecetasController extends Controller
         //dd($receta->id);
 
         for ($i = 0; $i < $numeroIngredientes; $i++) {
+            $ingrediente = new Ingredientes();
+
+            $validator = Validator::make([
+                'nombre' => $ingredientesNombres[$i],
+                'cantidad' => $ingredientesCantidades[$i],
+                'unidadMedida' => $ingredientesUnidades[$i],
+            ], [
+                'nombre' => 'required|regex:/^[\pL\s\-]+$/u|max:150',
+                'cantidad' => 'required|numeric|min:0',
+                'unidadMedida' => 'nullable', // Acepta un valor nulo (opcional)
+            ]);
+
+            if ($validator->fails()) {
+                // Manejar la validación fallida aquí
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
             $ingrediente = $receta->ingredientes()->create([
                 'nombre' => $ingredientesNombres[$i],
                 'cantidad' => $ingredientesCantidades[$i],
-                'unidad_medida' => $ingredientesUnidades[$i],
+                'unidadMedida' => $ingredientesUnidades[$i],
             ]);
-        
+
+            $ingrediente->save();
+
             $ingredientes[] = $ingrediente;
         }
         
@@ -132,7 +153,13 @@ class RecetasController extends Controller
      */
     public function edit(Recetas $receta)
     {
-        return view('recetas.recetas-edit', compact('receta'));
+        // Obtener todas las etiquetas existentes
+        $etiquetas = Etiqueta::all();
+
+        // Obtener los ingredientes de la receta
+        $ingredientes = $receta->ingredientes;
+
+        return view('recetas.recetas-edit', compact('receta', 'etiquetas', 'ingredientes'));
     }
 
     /**
@@ -143,7 +170,40 @@ class RecetasController extends Controller
         $receta->titulo = $request->titulo;
         $receta->descripcion = $request->descripcion;
         $receta->tipoComida = $request->tipoComida;
+
+        if ($request->hasFile('archivo')) {
+            $receta->archivo_ubicacion = $request->file('archivo')->store('public/img_recetas');
+        }
+        
         $receta->save();
+
+        // Actualizar las etiquetas de la receta
+        $etiquetasSeleccionadas = $request->input('etiqueta_id', []);
+
+        $nuevasEtiquetas = array_diff($etiquetasSeleccionadas, Etiqueta::pluck('id')->toArray());
+
+        $etiquetasCreadas = [];
+        foreach ($nuevasEtiquetas as $nuevaEtiqueta) {
+            $etiqueta = Etiqueta::create(['etiqueta' => $nuevaEtiqueta]);
+            $etiquetasCreadas[] = $etiqueta->id;
+        }
+
+        $etiquetasReceta = array_merge($etiquetasCreadas, Etiqueta::whereIn('id', $etiquetasSeleccionadas)->pluck('id')->toArray());
+        $receta->etiquetas()->sync($etiquetasReceta);
+
+        // Actualizar ingredientes
+        $ingredientesNombres = $request->input('nombre', []);
+        $ingredientesCantidades = $request->input('cantidad', []);
+        $ingredientesUnidades = $request->input('unidadMedida', []);
+
+        foreach ($ingredientesNombres as $index => $nombre) {
+            $receta->ingredientes()->create([
+                'nombre' => $nombre,
+                'cantidad' => $ingredientesCantidades[$index],
+                'unidadMedida' => $ingredientesUnidades[$index],
+            ]);
+        }
+
         
         return redirect()->route('recetas.index');
     }
@@ -153,6 +213,8 @@ class RecetasController extends Controller
      */
     public function destroy(Recetas $receta)
     {
+        // Eliminar manualmente los ingredientes relacionados
+        $receta->ingredientes()->delete();
         $receta->delete();
         return redirect()->route('recetas.index');
     }

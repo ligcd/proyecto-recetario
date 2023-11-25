@@ -81,7 +81,7 @@
             <h1>Ingredientes</h1>
             <ol>
                 @foreach ($receta->ingredientes as $ingrediente)
-                    <li>{{ $ingrediente->nombre}}</li>
+                    <li>{{ $ingrediente->cantidad}} {{ $ingrediente->unidadMedida}} de {{ $ingrediente->nombre}}</li>
                 @endforeach
             </ol>
           </div>
