@@ -17,7 +17,8 @@ class RecetasController extends Controller
 #$this->middleware(['auth','verified'])->except('index','show'); 
      public function __construct()
      {
-       $this->middleware(['auth'])->except('index','show');
+        $this->middleware(['auth','verified'])->except('index','show'); 
+       #$this->middleware(['auth'])->except('index','show');
       } 
      
      public function index(Request $request)

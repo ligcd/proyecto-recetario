@@ -52,7 +52,8 @@ class ComentariosController extends Controller
             $comentarios->recetas_id = $request->recetas_id;
             $comentarios->save();
             
-            return redirect()->route('comentarios.index');
+            return redirect()->route('recetas.show', ['receta' => $request->recetas_id])
+            ->with('success', 'Comentario agregado exitosamente');
             
     }
 
@@ -87,7 +88,9 @@ class ComentariosController extends Controller
         $comentario->comentario=$request->comentario; 
         $comentario->calificacion=$request->calificacion; 
         $comentario->save();
-        return redirect()->route('comentarios.index');
+        $recetaId = $comentario->receta->id;
+
+        return redirect()->route('recetas.show', $recetaId);
         //
     }
 
@@ -96,8 +99,10 @@ class ComentariosController extends Controller
      */
     public function destroy(Comentarios $comentario)
     {
-        $comentario->DELETE(); 
-        return redirect()->route('comentarios.index');
-        //
+        $recetaId = $comentario->receta->id;  // Asegúrate de que la relación esté definida correctamente
+
+        $comentario->delete();  // Cambiado a minúscula
+    
+        return redirect()->route('recetas.show', $recetaId);
     }
 }
