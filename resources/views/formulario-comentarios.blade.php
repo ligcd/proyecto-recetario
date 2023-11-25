@@ -87,6 +87,8 @@
         </div>
 
   
+
+  
 </section><!-- End Why Us Section -->
 
 <!-- ======= Stats Counter Section ======= -->
@@ -158,57 +160,7 @@
 
 
 
-     <!-- ======= Gallery Section ======= -->
-     <section id="gallery" class="gallery section-bg">
-      <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2>Recetas</h2>
-          <p>Encuentra más recetas en <span> DELINY </span></p>
-        </div>
-
-        <div class="gallery-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-
-          <div class="swiper-slide">
-    <a class="glightbox" data-gallery="images-gallery" href="{{ asset('assets/img/menu/menu-item-1.png') }}">
-        <img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt="">
-    </a>
-</div>
-<div class="swiper-slide">
-    <a class="glightbox" data-gallery="images-gallery" href="{{ asset('assets/img/menu/menu-item-2.png') }}">
-        <img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt="">
-    </a>
-</div>
-<div class="swiper-slide">
-    <a class="glightbox" data-gallery="images-gallery" href="{{ asset('assets/img/menu/menu-item-3.png') }}">
-        <img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt="">
-    </a>
-</div>
-<div class="swiper-slide">
-    <a class="glightbox" data-gallery="images-gallery" href="{{ asset('assets/img/menu/menu-item-4.png') }}">
-        <img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt="">
-    </a>
-</div>
-<div class="swiper-slide">
-    <a class="glightbox" data-gallery="images-gallery" href="{{ asset('assets/img/menu/menu-item-5.png') }}">
-        <img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt="">
-    </a>
-</div>
-<div class="swiper-slide">
-    <a class="glightbox" data-gallery="images-gallery" href="{{ asset('assets/img/menu/menu-item-6.png') }}">
-        <img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt="">
-    </a>
-</div>
-
-
-           
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Gallery Section -->
 
     
   </main><!-- End #main -->
