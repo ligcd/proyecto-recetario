@@ -66,15 +66,7 @@
           <li class="dropdown"><a href="#"><span>¿Qué te gustaría encontrar?</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">Registrate para subir recetas</a></li>
-              <li class="dropdown"><a href="#"><span>Ver recetas</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Comida Japonesa</a></li>
-                  <li><a href="#">Comida Mexicana</a></li>
-                  <li><a href="#">Comida Italiana</a></li>
-                  <li><a href="#">Comida Vegetariana</a></li>
-                  <li><a href="#">Otros países...</a></li>
-                </ul>
-              </li>
+              <li><a href="#">Ver recetas</a></li>
               <li><a href="#">Ingredientes</a></li>
               <li><a href="#">Realiza tu menú</a></li>
               <li><a href="#">Más sobre nosotros</a></li>
