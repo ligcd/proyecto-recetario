@@ -21,6 +21,11 @@ class Recetas extends Model
         return $this->hasMany(Ingredientes::class);
     }
 
+    public function procedimientos()
+    {
+        return $this->hasMany(Procedimiento::class);
+    }
+
     public function comentarios(): HasMany
     {
         return $this->hasMany(Comentarios::class);

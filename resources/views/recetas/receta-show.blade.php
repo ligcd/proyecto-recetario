@@ -63,31 +63,81 @@
 
         </div>
     </header><!-- End Header -->
-    <!-- ======= Hero Section ======= -->
+
+    <!-- ======= Informacion general de la receta ======= -->
     <section id="hero" class="hero d-flex align-items-center section-bg">
-        <div class="container">
+      <div class="container">
+        <!-- ======== Seccion de nombre, descripcion, etiquetas e imagen de la receta ======== -->
         <div class="row justify-content-between gy-5">
-            <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-            <h2>{{$receta->titulo}}</h2>
-            <p>{{$receta->descripcion}}</p>
+
+          <!-- ======== Nombre, descripción y etiquetas de la receta ======== -->
+          <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+            <h2 data-aos="fade-up" class="aos-init aos-animate">{{$receta->titulo}}</h2>
+            <p data-aos="fade-up" data-aos-delay="100" class="aos-init aos-animate">{{$receta->descripcion}}</p>
+            <div class="etiquetas">
+              <ul>
+                  @foreach ($receta->etiquetas as $etiqueta)
+                      <li>{{ $etiqueta->etiqueta }}</li>
+                  @endforeach
+              </ul>
             </div>
-            <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-              <a href="{{ route('recetaimg.descarga', $receta) }}">
-                <img src="{{ \Storage::url($receta->archivo_ubicacion) }}" alt="{{ $receta->titulo }}" class="img-fluid">
-              </a>
+          </div>
+          
+          <!-- ======== Imgen de la receta ======== -->
+          <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+            <a href="{{ route('recetaimg.descarga', $receta) }}">
+              <img src="{{ \Storage::url($receta->archivo_ubicacion) }}" alt="{{ $receta->titulo }}" class="img-fluid aos-init aos-animate" data-aos="zoom-out" data-aos-delay="300">
+            </a>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="ingrediente-procedimiento" class="about">
+      <div class="container aos-init aos-animate" data-aos="fade-up">
+        <div class="section-header">
+          <p>Ingredientes<span>:</span></p>
+          <ul>
+              @foreach ($receta->ingredientes as $ingrediente)
+                  <h2><li><i class="bi bi-check2-all"></i>{{ $ingrediente->cantidad}} {{ $ingrediente->unidadMedida}} de {{ $ingrediente->nombre}}</li></h2>
+              @endforeach
+          </ul>
+        </div>
+      </div>
+      <div class="container aos-init aos-animate" data-aos="fade-up">
+        <div class="section-header">
+          <p>Preparación de <span>{{$receta->titulo}}:</span></p>
+        </div>
+        <div class="proce">
+          <ol>
+            @foreach ($receta->procedimientos as $proce)
+              <div style="display: flex; flex-direction: column; align-items: center;">
+              <li>{{ $proce->procedimiento}} <br><br></li>
+              <img src="{{ \Storage::url($proce->archivo_ubicacion) }}" alt="{{ $receta->titulo }}" style="width: 50%; height: 50%;">
+              <br><br>
+              </div>
+            @endforeach
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!--
+              
+              
             </div>
+            
           </div>
           <div>
             <h1>Ingredientes</h1>
-            <ol>
-                @foreach ($receta->ingredientes as $ingrediente)
-                    <li>{{ $ingrediente->cantidad}} {{ $ingrediente->unidadMedida}} de {{ $ingrediente->nombre}}</li>
-                @endforeach
-            </ol>
+            
           </div>
           <div>
             <h1>Procedimiento</h1>
-            <p>{{$receta->procedimiento}}</p>
+            
           </div>
           <div>
             <h1>Comentarios</h1>
@@ -97,17 +147,10 @@
                 @endforeach
             </ul>
           </div>
-          <div>
-            <h1>Etiquetas</h1>
-            <ul>
-                @foreach ($receta->etiquetas as $etiqueta)
-                    <li>{{ $etiqueta->etiqueta }}</li>
-                @endforeach
-            </ul>
-          </div>
+          
         </div>
         
-        <!--<h4>Usuario que creó:  $receta->user->name }}</h4>-->
-    </section><!-- End Hero Section -->
+        -<h4>Usuario que creó:  $receta->user->name }}</h4>-
+    </section><!- End Hero Section -->
 </body>
 </html>

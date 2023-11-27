@@ -70,7 +70,7 @@ section {
 
 .section-header {
   text-align: center;
-  padding-bottom: 30px;
+  
 }
 
 .section-header h2 {
@@ -1102,6 +1102,56 @@ section {
   font-family: var(--font-secondary);
 }
 
+.about .section-header{
+  text-align: left;
+}
+
+.about .section-header ul{
+  list-style-type: none;
+}
+
+.about .section-header li{
+  margin-bottom: 10px;
+  display: flex;
+  font-size: 15px;
+  align-items: center;
+}
+
+.about .section-header li i{
+  color: #ce1212;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.proce{
+  font-size: 18px;
+  color: #6f6f6f;
+}
+
+.about .proce ol{
+  list-style: none;
+  counter-reset: custom-counter;
+}
+
+.about .proce ol li{
+  position: relative;
+  counter-increment: custom-counter;
+  padding-left: 30px;
+  padding-right: 50px;
+  text-align: justify;
+}
+
+.about .proce ol li::before{
+  content: counter(custom-counter);
+  position: absolute;
+  top:0;
+  left: 0;
+  font-size: 50px; /* Cambia el tamaño del número */
+  font-family: var(--font-primary); /* Cambia la tipografía del número */
+  font-weight: bolder;
+  color: #ce1212; /* Cambia el color del número según tus preferencias */
+}
+
 .about .call-us {
   padding: 30px;
   margin-bottom: 60px;
@@ -1699,7 +1749,8 @@ section {
   background-position: center;
 }
 
-.ingrediente-bloque{
+.ingrediente-bloque,
+.procedimiento-bloque{
   margin-bottom: 20px;
 }
 
@@ -1715,10 +1766,22 @@ section {
   color: var(--color-primary) ;
   transition: 0.4s;
   border-radius: 10px;
+  
 }
 
 .add-ingredient button[type="button"]:hover{
   font-weight: bolder;
+}
+
+.add-ingredient .option-procedimiento{
+  justify-content: space-between;
+}
+
+.option-procedimiento{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .book-a-table .reservation-form-bg {
@@ -1727,6 +1790,10 @@ section {
 
 .book-a-table .php-email-form {
   padding: 40px;
+}
+
+.procedimiento-bloque .php-email-form{
+   padding: 0;
 }
 
 @media (max-width: 575px) {
@@ -2049,7 +2116,7 @@ section {
 .hero p {
   color: #4f4f5a;
   font-weight: 400;
-  margin-bottom: 30px;
+  
 }
 
 .hero .btn-book-a-table {
@@ -2092,6 +2159,26 @@ section {
 
 .hero .btn-watch-video:hover i {
   color: rgba(206, 18, 18, 0.8);
+}
+
+.hero img{
+  border: 1px solid #ce1212;
+}
+
+.etiquetas ul{
+  display: flex;
+  list-style-type: none;
+  margin: 0 0 0;
+  padding: 0;
+}
+
+.etiquetas li{
+  background-color: #f5bab0ba;
+  color:#c65b5b;
+  font-size: 11px;
+  margin-right: 5px;
+  padding-inline: 3px;
+  border-radius: 5px;
 }
 
 @media (max-width: 640px) {

@@ -153,14 +153,15 @@
               <div class="col-md-4">
                 <select class="form-control" name="unidadMedida[]" id="unidadMedida">
                     <option value="">Selecciona una unidad de medida</option>
-                    <option value="Kg">Kilogramos (Kg)</option>
-                    <option value="gr">Gramos (gr)</option>
-                    <option value="ml">Mililitros (ml)</option>
-                    <option value="L">Litros (L)</option>
-                    <option value="lb">Libras (lb)</option>
-                    <option value="oz">Onzas (oz)</option>
+                    <option value="Kilogramos">Kilogramos (Kg)</option>
+                    <option value="Gramos">Gramos (gr)</option>
+                    <option value="Militros">Mililitros (ml)</option>
+                    <option value="Litros">Litros (L)</option>
+                    <option value="Libras">Libras (lb)</option>
+                    <option value="Onzas">Onzas (oz)</option>
                     <option value="c/s">Cucharadas sopera (c/s)</option>
                     <option value="c/c">Cucharaditas de postre (c/c)</option>
+                    <option value="Tazas">Tazas (tz)</option>
                 </select>
                 <span class="text-muted"style="margin-left:5px; font-size:10px;">(deja en blanco si es necesario)</span>
               </div>
@@ -174,8 +175,22 @@
               <div class="section-header">
                 <p style="font-size:50px;">Agregar <span>Procedimiento</span></p>
               </div>
-              <textarea class="form-control" name="procedimiento" rows="10" placeholder="Describe el procedimiento de elaboración del platillo"></textarea>
-              <div class="validate"></div>
+              <div class="row gy-0 procedimiento-bloque php-email-form" style="padding:0;">
+                <p>Paso numero </p>
+                <textarea class="form-control" name="procedimiento[]" rows="5" placeholder="Describe el procedimiento de elaboración del platillo"></textarea>
+                <div class="add-ingredient row gy-0">   
+                  <div class="option-procedimiento">
+                    <div>               
+                      <label style="font-size: 12px; color: #ce1212;">Ilustra tu paso con una imagen</label>
+                      <input type="file" name="archivoProcedimiento[]" class="form-control"  onchange="mostrarImagen(this)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="add-ingredient">
+                <button type="button"  id="btnAgregarOtroProce">
+                  <i class="bi bi-plus"></i>Agregar otro paso</button>
+              </div>
             </div>
             <div class="text-center php-email-form"><button type="submit">Publicar receta</button></div>
           </div>
@@ -202,6 +217,12 @@
     $("#btnAgregarOtroIngrediente").click(function () {
       // Clonar la última sección de ingredientes y agregarla después
       $(".ingrediente-bloque:last").clone().insertAfter(".ingrediente-bloque:last");
+    });
+
+    // Manejar el clic en el botón "Agregar otro paso"
+    $("#btnAgregarOtroProce").click(function () {
+      // Clonar la última sección de procedimientos y agregarla después
+      $(".procedimiento-bloque:last").clone().insertAfter(".procedimiento-bloque:last");
     });
 
      // Inicializar Select2 en el campo de etiquetas

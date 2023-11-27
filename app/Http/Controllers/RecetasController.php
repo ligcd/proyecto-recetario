@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Procedimiento;
 
 class RecetasController extends Controller
 {
@@ -51,8 +52,9 @@ class RecetasController extends Controller
     {
         $etiquetas = Etiqueta::all();
         $recetaId = Ingredientes::all(); // O asigna el valor adecuado según tus necesidades.
+        $procedimientos = Procedimiento::all();
     
-        return view('recetas/formularioRecetas', compact('etiquetas', 'recetaId'));
+        return view('recetas/formularioRecetas', compact('etiquetas', 'recetaId', 'procedimientos'));
     }
 
     /**
@@ -63,8 +65,7 @@ class RecetasController extends Controller
         $request->validate([
             'titulo' => 'required|regex:/^[\pL\s\-]+$/u|max:150',
             'tipoComida' => 'required|regex:/^[\pL\s\-]+$/u|max:100',
-            'descripcion' => 'required|string|max:1000',
-            'procedimiento' => 'required|string|max:10000', // Ajusta el número según tus necesidades
+            'descripcion' => 'required|string|max:10000',
             'archivo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:10000',
         ]);
     
@@ -86,7 +87,6 @@ class RecetasController extends Controller
             'titulo' => $request->titulo,
             'tipoComida' => $request->tipoComida,
             'descripcion' => $request->descripcion,
-            'procedimiento' => $request->procedimiento,
             'archivo_ubicacion' => $archivoUbicacion,
             'user_id' => Auth::id(),
         ]);
@@ -135,7 +135,43 @@ class RecetasController extends Controller
 
             $ingredientes[] = $ingrediente;
         }
+
+
+        $procedimientoDescripcion = $request->input('procedimiento', []);
+        $archivoProcedimientoUbicacion = $request->file('archivoProcedimiento', []);
         
+        $numeroProcedimientos = is_array($procedimientoDescripcion) ? count($procedimientoDescripcion) : 0;
+
+
+        for ($i = 0; $i < $numeroProcedimientos; $i++) {
+            $procedimiento = new Procedimiento();
+
+            /*$validator = Validator::make([
+                'nombre' => $ingredientesNombres[$i],
+                'cantidad' => $ingredientesCantidades[$i],
+                'unidadMedida' => $ingredientesUnidades[$i],
+            ], [
+                'nombre' => 'required|regex:/^[\pL\s\-]+$/u|max:150',
+                'cantidad' => 'required|numeric|min:0',
+                'unidadMedida' => 'nullable', // Acepta un valor nulo (opcional)
+            ]);
+
+            if ($validator->fails()) {
+                // Manejar la validación fallida aquí
+                return redirect()->back()->withErrors($validator)->withInput();
+            }*/
+
+            $archivosProcedimientoUbicacion = $archivoProcedimientoUbicacion[$i]->store('public/img_recetas/procedimientos');
+
+            $procedimiento = $receta->procedimientos()->create([
+                'procedimiento' => $procedimientoDescripcion[$i],
+                'archivo_ubicacion' => $archivosProcedimientoUbicacion,
+            ]);
+
+            $procedimiento->save();
+
+            $procedimientos[] = $procedimiento;
+        }        
 
         return redirect()->route('recetas.index');
     
