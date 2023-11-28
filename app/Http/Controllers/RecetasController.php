@@ -181,7 +181,12 @@ class RecetasController extends Controller
     
     public function show(Recetas $receta)
     {
-        return view('recetas.receta-show', compact('receta'));
+        $comentarios = $receta->comentarios;
+
+        // Calcula el promedio de calificaciones
+        $promedio = $comentarios->avg('calificacion');
+
+        return view('recetas.receta-show', compact('receta', 'promedio'), );
         //$recetas = Recetas::find($id);
     }
 

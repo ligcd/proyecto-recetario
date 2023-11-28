@@ -76,20 +76,27 @@
 
     </div>
   </header><!-- End Header -->
-
   <section id="why-us" class="why-us section-bg">
-   <div class="section-header">
-          <p>Información comentario ID: <span> {{$comentario->id}} </span></p>
-        </div>
-      
-        <li>
-    <div class="bg-danger text-white p-3 rounded d-flex align-items-center">
-        <div class="w-100">
-            <p class="fw-bold text-center">ID COMENTARIO: {{$comentario->id}}</p>
-            <p class="fw-bold text-center">Fecha de creación del comentario: {{$comentario->created_at}}</p>
-        </div>
+    <div class="section-header">
+        <p>Información comentario ID: <span>{{$comentario->id}}</span></p>
     </div>
-</li>
+
+    <li>
+        <div class="bg-danger text-white p-3 rounded d-flex align-items-center">
+            <div class="w-100">
+                <p class="fw-bold text-center">ID COMENTARIO: {{$comentario->id}}</p>
+                <p class="fw-bold text-center">Fecha de creación del comentario: {{$comentario->created_at}}</p>
+
+                @if($comentario->user)
+                    <p class="fw-bold text-center">Usuario: {{$comentario->user->name}}</p>
+                    <p class="fw-bold text-center">Correo del usuario: {{$comentario->user->email}}</p>
+                @else
+                    <p class="fw-bold text-center">Este comentario no tiene un usuario asociado.</p>
+                @endif
+            </div>
+        </div>
+    </li>
+</section>
 
         
 
