@@ -21,31 +21,23 @@ class ComentariosController extends Controller
       } 
 
     
-    public function index()
+    /*public function index()
     {
-        $allcomentarios = Comentarios::all(); 
+        $comentarios = Comentarios::all(); 
 
-        return view('nueva-pagina-comentarios', compact('allcomentarios'));
-        #return view('pagina-principal');
+        return view('nueva-pagina-comentarios', compact('comentarios'));
      
     }
 
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-
-    public function create()
+    public function create()  //Ahora el create está en el show de recetas
     {
         $receta = Recetas::all();
-
         #return view('formulario-comentarios');  
         return view('formulario-comentarios', compact('receta')); 
         
-    }  #CON ESTO ESPERO QUE REGISTRE PERO AÚN NO SÉ CÓMO 
+    }  
 
-    /**
+    
      * Store a newly created resource in storage.
      */
     public function store(Request $request) #CON ESTO SE GUARDA TODO A LA BASE DE DATOS
@@ -64,10 +56,7 @@ class ComentariosController extends Controller
             
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Comentarios $comentario)
+    /*public function show(Comentarios $comentario)
     {#se recibe un objeto del modelo que creamos, el objeto es una consulta select*from etc. 
         #dd($comentarios);
 
@@ -93,6 +82,7 @@ class ComentariosController extends Controller
      */
     public function update(Request $request, Comentarios $comentario)
     {
+
         $comentario->comentario=$request->comentario; 
         $comentario->calificacion=$request->calificacion; 
         $comentario->save();

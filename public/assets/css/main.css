@@ -801,6 +801,22 @@ section {
   font-style: italic;
   color: #b7b7b7;
 }
+   
+.comment-button {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 40px;
+  font-size: 20px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.comment-button:hover {
+  background-color: darkred;
+  color: ivory;
+}
 
 .blog .blog-comments {
   margin-bottom: 30px;
@@ -1622,6 +1638,12 @@ section {
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
   background-color: var(--color-primary);
+}
+
+.comment-bg{
+  background-color: #eee;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 /*--------------------------------------------------------------

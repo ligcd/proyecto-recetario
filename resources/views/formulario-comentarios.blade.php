@@ -106,27 +106,23 @@
 
 
 <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-      
-        <form method="POST" action="{{ route('comentarios.store') }}">
+  <div class="container" data-aos="fade-up">
+    <form method="POST" action="{{ route('comentarios.store') }}">
         @csrf 
         <h2 style="font-weight: bold; font-size: 30px; color: #ffffff;" >Ingresa tu opinión</h2>
-            <div class="row">
             <div class="col-xl-12 form-group">
-                <textarea name="comentario" class="form-control" placeholder="Tu Comentario" rows="5" required></textarea>
+                <input type="textarea" name="comentario" class="form-control" placeholder="Tu Comentario" rows="5" required></textarea>
             </div>
-
         <div class="form-group">
             <label style="font-weight: bold; color: #ffffff;" for="calificacion">Calificación:</label>
             <select name="calificacion" id="calificacion" class="form-control">
-                <option value="5">Excelente</option>
-                <option value="4">Muy bueno</option>
-                <option value="3">Bueno</option>
-                <option value="2">Regular</option>
-                <option value="1">Malo</option>
+                <option value="5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+                <option value="4"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+                <option value="3"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+                <option value="2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+                <option value="1"><i class="bi bi-star-fill"></i></option>
             </select>
         </div>
-
         <select name="recetas_id">
             @foreach ($receta as $r)
                 <option value="{{ $r->id }}">
@@ -134,16 +130,10 @@
                 </option>
             @endforeach
         </select>
-
-        <div class="text-center">
     <button type="submit" style="display: inline-block; padding: 10px 20px; background-color: red; color: white; border: none; border-radius: 20px; cursor: pointer;">Enviar comentario</button>
-        </div>
-
-
-        </form>
-
-
-    </section><!-- End COMENTARIOS -->
+    </form>
+  </div>
+</section><!-- End COMENTARIOS -->
 
 
 

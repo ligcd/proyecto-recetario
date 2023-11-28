@@ -182,7 +182,6 @@ class RecetasController extends Controller
     public function show(Recetas $receta)
     {
         $comentarios = $receta->comentarios;
-
         // Calcula el promedio de calificaciones
         $promedio = $comentarios->avg('calificacion');
 
