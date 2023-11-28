@@ -115,7 +115,8 @@
               <div class="menu">
                 <ul class="nav nav-tabs d-flex justify-content-center aos-init aos-animate">
                   <li class="nav-item" style="margin-right: 3em"><i class="fas fa-utensils"></i><a style="font-size:12px; margin-left:5px;">{{$receta->tipoComida}}</a>
-                  <li class="nav-item" style="margin-right: 1em"><i class="far fa-comment"></i><a href="blog-single.html" style="font-size:12px; margin-left:5px; color:black;">Comentarios</a></li>
+                  <li class="nav-item" style="margin-right: 1em"><i class="far fa-comment"></i><a href="{{route('recetas.show', $receta->id)}}"style="font-size:12px; margin-left:5px; color:black;">Comentarios</a></li>
+                  
                 </ul>
               </div>
               

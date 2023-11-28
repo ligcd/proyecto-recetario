@@ -31,6 +31,9 @@ Route::get('recetaimg-descarga/{receta}', [RecetasController::class, 'descargar'
 
 Route::get('/recetas/{receta}/descargar-pdf', [PDFController::class, 'descargarRecetaPDF'])->name('recetas.descargar-pdf');
 
+Route::get('/comentarios/create/{receta_id}', 'ComentarioController@create')->name('comentarios.create');
+
+
 Route::resource('ingredientes', IngredientesController::class); 
 
 Route::resource('comentarios', ComentariosController::class);

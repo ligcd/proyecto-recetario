@@ -6,20 +6,24 @@ use App\Models\Comentarios;
 use App\Models\Recetas;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ComentariosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+     public function __construct()
+     {
+        $this->middleware(['auth','verified'])->except('index','show'); 
+       #$this->middleware(['auth'])->except('index','show');
+      } 
+
+    
     public function index()
     {
-        $allcomentarios = Comentarios::all(); #Para recuperar los datos de la tabla
-        #dd($allcomentarios);
-        #allcomentarios lo nombré para quefueran todos los comentarios
-        #>>   Comentarios::where('nombre', 'Lili')->get(); 
-        #Ese tiene la misma función pero es más para una selección
-        #Por ejemplo si quiero que aparezcan solo nombres o calificaciones específicass
+        $allcomentarios = Comentarios::all(); 
 
         return view('nueva-pagina-comentarios', compact('allcomentarios'));
         #return view('pagina-principal');
@@ -46,14 +50,17 @@ class ComentariosController extends Controller
      */
     public function store(Request $request) #CON ESTO SE GUARDA TODO A LA BASE DE DATOS
     {
-            $comentarios = new Comentarios(); #Lo que viene del request lo asignamos acá 
-            $comentarios->comentario = $request->comentario;  #Comentarios es por el nombre de la tabla ve en migrations
-            $comentarios->calificacion=$request->calificacion;
-            $comentarios->recetas_id = $request->recetas_id;
-            $comentarios->save();
-            
-            return redirect()->route('recetas.show', ['receta' => $request->recetas_id])
-            ->with('success', 'Comentario agregado exitosamente');
+
+        $comentario = new Comentarios();
+        $comentario->comentario = $request->comentario;
+        $comentario->calificacion = $request->calificacion;
+        $comentario->recetas_id = $request->recetas_id;
+        $comentario->user_id = auth()->id();
+      
+        $comentario->save();
+    
+        return redirect()->route('recetas.show', ['receta' => $request->recetas_id])
+                         ->with('success', 'Comentario agregado exitosamente');
             
     }
 
@@ -63,6 +70,7 @@ class ComentariosController extends Controller
     public function show(Comentarios $comentario)
     {#se recibe un objeto del modelo que creamos, el objeto es una consulta select*from etc. 
         #dd($comentarios);
+
         return view('comentario-info', compact('comentario'));
         #$comentario= Comentarios::find($id);
 

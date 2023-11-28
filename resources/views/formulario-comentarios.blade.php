@@ -67,7 +67,7 @@
       <nav id="navbar" class="navbar">
         <ul>
         <li>
-        <a href="{{ route('comentarios.index') }}" class="btn btn-danger text-white">Regresar a comentarios</a>
+        <a href="{{ route('recetas.index') }}" class="btn btn-danger text-white">Regresar a recetas</a>
         </li>
           <li><a href="#gallery">Más recetas</a></li>
         </ul>

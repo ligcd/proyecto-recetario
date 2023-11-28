@@ -120,6 +120,28 @@
 
 
 
+    <!-- Mostrar el promedio de calificaciones sin fondo de imagen -->
+    <div class="container" data-aos="zoom-out">
+    <div class="row gy-4">
+        <div class="text-center">
+            <span style="font-weight: bold; font-size: 30px; color: #ffffff;">Promedio y Estrellas</span>
+        </div>
+    </div>
+
+
+    <div style="padding: 20px; border-radius: 10px; margin-top: 20px; background-color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">
+        <p style="color: white; font-size: 24px; font-weight: bold;">Calificación promedio según usuarios: {{ $promedio }}</p>
+        <p style="color: white; font-size: 24px; font-weight: bold;">
+            @for ($i = 1; $i <= 5; $i++)
+                @if ($i <= $promedio)
+                    <i class="fas fa-star" style="color: goldenrod;"></i>
+                @else
+                    <i class="far fa-star" style="color: goldenrod;"></i>
+                @endif
+            @endfor
+        </p>
+    </div>
+</div>
 
 
 
@@ -158,7 +180,8 @@
     </div>
 
     <div class="text-center">
-        <a href="{{ route('comentarios.create') }}" class="comment-button">Da click para comentar</a>
+    <a href="{{ route('comentarios.create', ['receta_id' => $receta->id]) }}" class="comment-button">Da click para comentar</a>
+     
     </div>
 </section>
 <!--SOLO PARA EL BOTÓN SOLO PARA EL BOTÓN-->
@@ -209,7 +232,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
-
 <ul class="comment-list">
     @foreach ($receta->comentarios as $c)
         <a href="{{ route('comentarios.show', $c->id)}}" style="color: white">
@@ -235,7 +257,11 @@
                         @endfor
                         <p>Calificación: {{ $c->calificacion }} estrellas</p>
                     </div>
+
+                    <!-- Muestra el nombre del usuario -->
+                    <p>Usuario: {{ $c->user->name }}</p>
                 </div>
+
                 <!-- Agrega enlaces para editar y eliminar -->
                 <div class="actions">
                     <a href="{{ route('comentarios.edit', $c->id) }}" class="edit-link">Editar Comentario</a>
@@ -249,6 +275,7 @@
         </li>
     @endforeach
 </ul>
+
 
 <!-- FIN DE COMENTARIOS LISTADO -->
 
