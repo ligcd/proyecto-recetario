@@ -20,6 +20,5 @@ class Etiqueta extends Model
     public function setEtiquetaAttribute($value)
     {
         //Mutator 
-        $this->attributes['etiqueta'] = strtoupper($value); // Convierte la etiqueta a mayúsculas antes de guardarla
-    }
+        $this->attributes['etiqueta'] = mb_strtoupper($value, 'UTF-8');    }
 }
