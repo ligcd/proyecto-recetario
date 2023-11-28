@@ -17,4 +17,9 @@ class Etiqueta extends Model
     {
         return $this->belongsToMany(Recetas::class);
     }
+    public function setEtiquetaAttribute($value)
+    {
+        //Mutator 
+        $this->attributes['etiqueta'] = strtoupper($value); // Convierte la etiqueta a mayúsculas antes de guardarla
+    }
 }

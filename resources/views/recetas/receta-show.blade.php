@@ -304,39 +304,6 @@
 
   </footer><!-- End Footer -->
   <!-- End Footer -->
-  <div class="modal fade" id="editarComentarioModal" tabindex="-1" role="dialog" aria-labelledby="editarComentarioModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editarComentarioModalLabel">Editar Comentario</h5>
-          <div class="modal-body">
-            <form id="formComentario" method="POST" action="{{ route('comentarios.update', $c->id) }}">
-              @csrf
-              @method('PATCH')
-              <div class="form-group">
-                <textarea name="comentario" class="form-control" value="{{$c->comentario}}" rows="5" required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="calificacion">Calificación:</label>
-                <select name="calificacion" id="calificacion" class="form-control">
-                  <option value="5">Excelente</option>
-                  <option value="4">Muy bueno</option>
-                  <option value="3">Bueno</option>
-                  <option value="2">Regular</option>
-                  <option value="1">Malo</option>
-                </select>
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-              </div>
-            </form>
-          </div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </x-deliny-layout>
 
