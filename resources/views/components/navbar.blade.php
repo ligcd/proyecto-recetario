@@ -24,7 +24,7 @@
                 </li>
                 <li><a href="{{ url('/menus') }}">Menú Semanal</a></li>
                 @auth
-                    <li><a href="{{ url('/inicio') }}">Inicio</a></li>
+                    <li><a href="{{ url('/inicio') }}">Mis recetas</a></li>
                     <li class="dropdown" ><a href="#"><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
                             <li><a href="{{ route('profile.show') }}">{{ __('Perfil') }}</a></li>
@@ -37,11 +37,6 @@
                             </form>
                         </ul>
                     </li>
-                @else
-                    <li><a href="{{ route('login') }}" >Iniciar Sesión</a></li>
-                    @if (Route::has('register'))
-                        <li><a href="{{ route('register') }}">Registrarme</a></li>
-                    @endif
                 @endauth
             </ul>
         </nav><!-- .navbar -->
@@ -49,7 +44,10 @@
             @auth
                 <a class="btn-book-a-table" href="{{ url('/recetas/create') }}">Sube tu receta</a>
             @else
-                <a class="btn-book-a-table" href="{{ url('login') }}">Únete a Deliny</a>
+                <div class="login">
+                <a class="btn-book-a-table" style="background-color: transparent; color: #ce1212;" href="{{ url('login') }}">Iniciar sesión</a>
+                <a class="btn-book-a-table" href="{{ url('register') }}">Únete a Deliny</a>
+                </div>
             @endauth
         @endif
             <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>

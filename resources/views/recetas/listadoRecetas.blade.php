@@ -44,28 +44,25 @@
   <x-navbar/>
   
   <main id="main">
-
-    <!-- ======= About Section ======= -->
     <section id="recetas" class="about" style="background-color: #fbfbfb">
       <div class="container aos-init aos-animate" data-aos="fade-up">
-        <br><br>
-        <div class="section-header">
+  
+        <div class="section-header text-center" style="margin-top:30px;">
           <h2>Recetas</h2>
           <p>Conoce nuestras <span>Mejores recetas</span></p>
         </div>
 
         <form action="{{ route('recetas.index') }}" method="GET" class="mt-4">
           @csrf
-      
-          <div class="form-group">
-              <label for="titulo">Buscar por título:</label>
-              <input type="text" name="titulo" class="form-control">
-          </div>
-      
-          <div class="form-group">
-              <label for="tipoComida">Buscar por tipo de comida:</label>
-              <select name="tipoComida" class="form-control">
-                  <option value="">Todos</option>
+          
+          <!--- =========== Buscador =========== --->
+          <div class="search d-flex align-items-center justify-content-between">
+            <div class="form-group col-lg-8" >
+              <input type="text" name="titulo" class="form-control" placeholder="Busca el nombre del platillo">
+            </div>
+            <div class="form-group d-flex align-items-center col-lg-4" >
+              <select name="tipoComida" class="form-control" style="margin:0 10px;">
+                  <option value="">Selecciona el tipo de comida</option>
                   <option value="Desayuno">Desayuno</option>
                   <option value="Almuerzo">Almuerzo</option>
                   <option value="Comida">Comida</option>
@@ -73,134 +70,70 @@
                   <option value="Postre">Postre</option>
                   <option value="Bebida">Bebida</option>
               </select>
-          </div>
-      
-          <div class="form-group mt-3">
-            <button type="submit" class="btn btn-primary">Buscar</button>
-            <a href="{{ route('recetas.index') }}" class="btn btn-secondary">Limpiar filtros</a>
-          </div>
-      </form>
-      
-      @if($noResultados)
-          <p>No se encontraron resultados.</p>
-      @else
-        <ul class="row gy-4">
-          @foreach($recetas as $receta)
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
-            <div class="call-us d-flex flex-column justify-content-center align-items-center" style="background-color: #ffffff; border-radius: 10px;">
-
-              <div class="d-flex justify-content-between" style="margin-bottom:1em; border-bottom: 1px solid #efefef; padding-bottom: 1em;">
-                <div style="margin-right: 5em;">
-                  <i class="bi bi-person" 
-                    style="background-color: #ce1212; color: #fff; padding:5px; padding-left: 8px; padding-right:8px; border-radius: 50%; font-size: 20px;"></i>
-                    <a href="blog-single.html" style="color: black; margin-left: 3px; font-size: 18px">
-                      <b>{{ $receta->user->name }}</b>
-                  </a>
-                </div>
-                <div>
-                  <a href="blog-single.html" style="color: black; margin-right: 5px; color: #9b9b9b;">{{$receta->created_at->format('d/m/Y H:i')}} <i class="bi bi-clock"></i></a>
-                </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary d-flex align-items-center" style="background-color:#CE1212; border:none; border-radius:20px;"><i class="bi bi-search" style="margin-right: 5px;"></i>Buscar</button>
               </div>
-              
-              <h4 style="font-size: 25px">
-                <a href="{{route('recetas.show', $receta->id)}}">
-                  {{$receta->titulo}}
-                </a>
-              </h4><br>
-
-              <div>
-                <img src="{{\Storage::url($receta->archivo_ubicacion)}}" alt="{{$receta->titulo}}" class="img-fluid">
-              </div>
-
-              <div class="menu">
-                <ul class="nav nav-tabs d-flex justify-content-center aos-init aos-animate">
-                  <li class="nav-item" style="margin-right: 3em"><i class="fas fa-utensils"></i><a style="font-size:12px; margin-left:5px;">{{$receta->tipoComida}}</a>
-                  <li class="nav-item" style="margin-right: 1em"><i class="far fa-comment"></i><a href="blog-single.html" style="font-size:12px; margin-left:5px; color:black;">Comentarios</a></li>
-                </ul>
-              </div>
-              
-              <div class="content">
-                <div class="text-center"></div><br>
-                <div class="text-center"><p style="font-size: 14px; color: black;">{{$receta->descripcion}}</p><br></div>
-              </div>
-
             </div>
           </div>
-          @endforeach
-        </ul>
-      @endif
+          <div class="d-flex align-items-center" style="margin-left: 7px; font-size:13px;">
+            <a href="{{ route('recetas.index') }}" class="text-center">Limpiar filtros</a>
+          </div>
+        </form>
+
+        <!--- =========== Listado de recetas =========== --->
+        @if($noResultados)
+          <p>No se encontraron resultados.</p>
+        @else
+        <div class="mt-5">
+          <ul class="row gy-4">
+            @foreach($recetas as $receta)
+            
+            <div class="d-flex justify-content-center col-lg-4" data-aos="fade-up" data-aos-delay="150">
+              <div class="call-us d-flex flex-column justify-content-center align-items-center" style="background-color: #ffffff; border-radius: 10px;">
+                
+                <!--- =========== Info de usuario y fecha =========== --->
+                <div class="d-flex justify-content-between align-items-center user-date">
+                  <div class="user">
+                    <a href="blog-single.html">
+                      <b>{{ $receta->user->name }}</b>
+                    </a>
+                  </div>
+                  <div class="date">
+                    <a href="blog-single.html">{{$receta->created_at->format('d/m/Y')}} <i class="bi bi-clock"></i></a>
+                  </div>
+                </div>
+
+                <h4>
+                  <a href="{{route('recetas.show', $receta->id)}}">
+                    {{$receta->titulo}}
+                  </a>
+                </h4>
+
+                <div class="img-receta">
+                  <img src="{{\Storage::url($receta->archivo_ubicacion)}}" alt="{{$receta->titulo}}" class="img-fluid">
+                  <div class="menu">
+                    <ul class="nav nav-tabs d-flex justify-content-between aos-init aos-animate">
+                      <li class="nav-item" style="margin-left: 3em;"><i class="fas fa-utensils"></i><a style="font-size:12px; margin-left:5px;">{{$receta->tipoComida}}</a>
+                      <li class="nav-item" style="margin-right: 3em;"><i class="far fa-comment"></i><a href="blog-single.html" style="font-size:12px; margin-left:5px; color:black;">Comentarios</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="descrip-receta mt-5">
+                  <div class="text-center fst-italic"><p>{{$receta->descripcion}}</p><br></div>
+                </div>
+
+
+              </div>
+            </div>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+
       </div>
     </section>
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div>
-            <h4>Address</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022 - US<br>
-            </p>
-          </div>
-
-        </div>
-
-        <div class="col-lg-3 col-md-6 footer-links d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Reservations</h4>
-            <p>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 footer-links d-flex">
-          <i class="bi bi-clock icon"></i>
-          <div>
-            <h4>Opening Hours</h4>
-            <p>
-              <strong>Mon-Sat: 11AM</strong> - 23PM<br>
-              Sunday: Closed
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 footer-links">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer><!-- End Footer -->
-  <!-- End Footer -->
+  </main>
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
