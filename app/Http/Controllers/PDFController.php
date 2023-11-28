@@ -26,7 +26,7 @@ class PDFController extends Controller
 
     
         // Guarda el PDF en la carpeta storage/app/public/pdf
-        $pdfPath = storage_path('app/public/pdf-recetas/receta_' . $receta->id . '.pdf');
+        $pdfPath = storage_path('app/public/receta_' . $receta->id . '.pdf');
         $pdf->Output($pdfPath, 'F');
 
 
