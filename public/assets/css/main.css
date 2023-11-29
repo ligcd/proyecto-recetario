@@ -47,6 +47,18 @@ a:hover {
   text-decoration: none;
 }
 
+::-webkit-scrollbar {
+  height: 8px; 
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #C1C1C1; 
+  border-radius: 4px; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0; 
+}
+
 h1,
 h2,
 h3,
@@ -2405,4 +2417,38 @@ section {
   }
 .menu__btn:hover{
   background:darkred;
+  color: white;
+}
+
+.menu__acciones {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom:50px ;
+}
+
+.menu__acciones p {
+  margin-right: 10px;
+  margin-bottom:5px ;
+}
+.crearmenu__btn {
+  font-size: 14px;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 12px 25px;
+  border-radius: 50px;
+  transition: 0.3s;
+  border: none;
+  max-width: 200px;
+  display: inline-block;
+  text-align: center;
+  line-height: 28px; /* Ajusta el valor de line-height según necesites */
+  margin:auto;
+  margin-top: 20px; /* Agrega espacio arriba */
+}
+
+.crearmenu__btn:hover {
+  background: darkred;
+  color: white;
 }

@@ -24,7 +24,7 @@
                 </li>
                 <li><a href="{{ url('/menus') }}">Menú Semanal</a></li>
                 @auth
-                    <li><a href="{{ url('/inicio') }}">Mis recetas</a></li>
+                    <li><a href="{{ url('/inicio') }}">Mis creaciones</a></li>
                     <li class="dropdown" ><a href="{{ url('/inicio') }}"><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
                             <li><a href="{{ url('/inicio') }}">Perfil</a></li>

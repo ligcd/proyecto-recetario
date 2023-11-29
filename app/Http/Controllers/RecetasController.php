@@ -174,7 +174,7 @@ class RecetasController extends Controller
             $procedimientos[] = $procedimiento;
         }        
 
-        return redirect()->route('recetas.index');
+        return view('inicio');
     
         //return redirect()->route('ingredientes.create', ['recetaId' => $receta->id]);
     }

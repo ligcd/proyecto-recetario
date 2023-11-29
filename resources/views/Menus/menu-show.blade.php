@@ -9,8 +9,9 @@
             <div class="container" data-aos="fade-up">
       
             <div class="row g-0">
-                <h2>{{ $menu->nombre }}</h2>
-                <br/><h3>Usuario: {{ $menu->user->name }}</h3>
+                <div class="section-headerp">
+                    <p>{{ $menu->nombre }}</p>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>

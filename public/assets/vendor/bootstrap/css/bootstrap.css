@@ -1874,6 +1874,8 @@ progress {
   margin-bottom: 1rem;
   vertical-align: top;
   border-color: var(--bs-table-border-color);
+  overflow-x: auto;
+  color: #bab7b7;
 }
 .table > :not(caption) > * > * {
   padding: 0.5rem 0.5rem;

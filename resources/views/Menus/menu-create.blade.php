@@ -13,7 +13,7 @@
                         <p style="font-size:50px;">Crear <span>Menu</span></p>
                     </div>
                     <div class="col-lg-12">
-                        <input type="text" name="nombre" class="form-control" placeholder="Nombre del menú">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre del menú"required>
                         @error('nombre')
                             <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
                         @enderror
