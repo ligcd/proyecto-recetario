@@ -106,7 +106,7 @@
               </div>
 
               <!--Etiquetas-->
-              <div class="col-lg-12" style="width: 100%">
+              <div class="col-lg-12">
                   <select id="etiquetas" name="etiqueta_id[]" multiple class="form-control" required style="width: 100%">
                   <!-- Opciones de etiquetas existentes -->
                   @foreach ($etiquetas as $etiqueta)
@@ -121,7 +121,7 @@
               </div>
 
               <!--Agregar ingredientes-->
-              <div class="text-center add"><a href="#ingredientes" id="btnAgregarIngredientes">Agregar ingredientes y procedimiento</a></div>
+              <div class="text-center add-ingredient"><a href="#ingredientes" id="btnAgregarIngredientes">Agregar ingredientes y procedimiento</a></div>
             </div>
           </div>
 
@@ -137,7 +137,7 @@
             
               <!--Nombre del ingrediente-->
               <div class="col-md-4">
-                <input type="text" name="nombre[]" class="form-control" id="nombre" placeholder="Nombre del Ingrediente" >
+                <input type="text" name="nombre[]" class="form-control" id="nombre" placeholder="Nombre del Ingrediente" required>
                 @error('nombre.*')
                   <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
                 @enderror
@@ -145,7 +145,7 @@
 
               <!--Cantidad del ingrediente-->
               <div class="col-md-4">
-                <input type="number" class="form-control" name="cantidad[]" step="0.100" id="cantidad" placeholder="Cantidad" >
+                <input type="number" class="form-control" name="cantidad[]" step="0.100" id="cantidad" placeholder="Cantidad" required>
                 @error('cantidad.*')
                   <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
                 @enderror
@@ -179,12 +179,12 @@
               </div>
               <div class="row gy-0 procedimiento-bloque php-email-form" style="padding:0;">
                 <p>Paso numero </p>
-                <textarea class="form-control" name="procedimiento[]" rows="5" placeholder="Describe el procedimiento de elaboración del platillo"></textarea>
+                <textarea class="form-control" name="procedimiento[]" rows="5" placeholder="Describe el procedimiento de elaboración del platillo" required></textarea>
                 <div class="add-ingredient row gy-0">   
                   <div class="option-procedimiento">
                     <div>               
                       <label style="font-size: 12px; color: #ce1212;">Ilustra tu paso con una imagen</label>
-                      <input type="file" name="archivoProcedimiento[]" class="form-control"  onchange="mostrarImagen(this)">
+                      <input type="file" name="archivoProcedimiento[]" class="form-control"  onchange="mostrarImagen(this)" required>
                     </div>
                   </div>
                 </div>

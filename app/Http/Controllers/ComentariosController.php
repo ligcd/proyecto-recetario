@@ -42,6 +42,11 @@ class ComentariosController extends Controller
      */
     public function store(Request $request) #CON ESTO SE GUARDA TODO A LA BASE DE DATOS
     {
+        $request->validate([
+            'comentario' => 'required|regex:/^[\pL\s\-]+$/u|min:20|max:400',
+            'calificacion' => 'required|integer|between:1,5',
+            'recetas_id' => 'required|integer'
+        ]);
 
         $comentario = new Comentarios();
         $comentario->comentario = $request->comentario;

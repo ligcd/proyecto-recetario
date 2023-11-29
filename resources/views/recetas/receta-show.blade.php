@@ -118,10 +118,14 @@
         <h2 style="font-weight: bold; font-size: 30px; color: #ffffff;" >Ingresa tu opinión</h2>
             <div class="col-xl-12 form-group">
                 <input type="textarea" name="comentario" class="form-control" placeholder="Tu Comentario" rows="5" required></textarea>
+                @error('comentario')
+                <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
+                @enderror
             </div>
         <div class="form-group">
             <label style="font-weight: bold; color: #ffffff;" for="calificacion">Calificación:</label>
-            <select name="calificacion" id="calificacion" class="form-control">
+            <select name="calificacion" id="calificacion" class="form-control" required>
+              <option value=""></option>
               <option value="5">Excelente</option>
               <option value="4">Muy bueno</option>
               <option value="3">Bueno</option>

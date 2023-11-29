@@ -1855,7 +1855,7 @@ section {
 
 .add-ingredient{
   display: flex;
-  justify-content: right;
+  justify-content: center;
 }
 
 .add-ingredient button[type="button"]{
@@ -1865,7 +1865,6 @@ section {
   color: var(--color-primary) ;
   transition: 0.4s;
   border-radius: 10px;
-  
 }
 
 .add-ingredient button[type="button"]:hover{
