@@ -12,7 +12,11 @@
                 <h2>Recetas</h2>
                 <p>Recetas <span>Creadas</span></p>
             </div>
-    
+            @if(count($recetas) === 0)
+                <div class="alert alert-info mt-3" role="alert">
+                    Aún no hay recetas disponibles.
+                </div>
+            @else
             <ul class="row gy-4">
                 @foreach($recetas as $receta)
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
@@ -22,12 +26,12 @@
                     <div style="margin-right: 5em;">
                         <i class="bi bi-person" 
                         style="background-color: #ce1212; color: #fff; padding:5px; padding-left: 8px; padding-right:8px; border-radius: 50%; font-size: 20px;"></i>
-                        <a href="blog-single.html" style="color: black; margin-left: 3px; font-size: 18px">
+                        <a href="" style="color: black; margin-left: 3px; font-size: 18px">
                             <b>{{ $receta->user->name }}</b>
                         </a>
                     </div>
                     <div>
-                        <a href="blog-single.html" style="color: black; margin-right: 5px; color: #9b9b9b;">{{$receta->created_at->format('d/m/Y H:i')}} <i class="bi bi-clock"></i></a>
+                        <a href="" style="color: black; margin-right: 5px; color: #9b9b9b;">{{$receta->created_at->format('d/m/Y H:i')}} <i class="bi bi-clock"></i></a>
                     </div>
                     </div>
                     
@@ -38,13 +42,15 @@
                     </h4><br>
     
                     <div>
-                    <img src="{{\Storage::url($receta->archivo_ubicacion)}}" alt="{{$receta->titulo}}" class="img-fluid">
+                        <a href="{{route('recetas.show', $receta->id)}}">
+                            <img src="{{\Storage::url($receta->archivo_ubicacion)}}" alt="{{$receta->titulo}}" class="img-fluid">
+                        </a>
                     </div>
     
                     <div class="menu">
                     <ul class="nav nav-tabs d-flex justify-content-center aos-init aos-animate">
                         <li class="nav-item" style="margin-right: 3em"><i class="fas fa-utensils"></i><a style="font-size:12px; margin-left:5px;">{{$receta->tipoComida}}</a>
-                        <li class="nav-item" style="margin-right: 1em"><i class="far fa-comment"></i><a href="blog-single.html" style="font-size:12px; margin-left:5px; color:black;">Comentarios</a></li>
+                        <li class="nav-item" style="margin-right: 1em"><i class="far fa-comment"></i><a href="" style="font-size:12px; margin-left:5px; color:black;">Comentarios</a></li>
                     </ul>
                     </div>
                     
@@ -66,9 +72,10 @@
                     </form>
                     </div>
                 </div>
-                </div>
                 @endforeach
             </ul>
+        @endif
+    </section>
             <div class="section-headerp">
                 <h2>Menús</h2>
                 <p>Menús <span>Creados</span></p>
@@ -142,6 +149,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    
 </main>
 </x-deliny-layout>

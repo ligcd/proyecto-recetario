@@ -5,7 +5,7 @@
         <!-- ======= Book A Table Section ======= -->
             <div class="container" style="margin-top: 100px; padding:auto" data-aos="fade-up">
       
-              <div class="menu g-0">
+              <div class="menus g-0">
          
                 <div class="col-lg-8 d-flex">
                   <form action="{{ route('menus.update', $menu) }}" method="POST" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
