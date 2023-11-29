@@ -94,6 +94,32 @@ section {
 .section-header p span {
   color: var(--color-primary);
 }
+.section-headerp {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.section-headerp h2 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: #7f7f90;
+  text-transform: uppercase;
+  font-family: var(--font-default);
+}
+
+.section-headerp p {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 400;
+  font-family: var(--font-primary);
+}
+
+.section-headerp p span {
+  color: var(--color-primary);
+}
 
 /*--------------------------------------------------------------
 # Breadcrumbs
@@ -2353,4 +2379,31 @@ section {
 
 .footer .credits a {
   color: #fff;
+}
+
+/*MENU*/
+
+.menu{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+  justify-content: center;
+}
+.menu__btn{
+  font-size: 14px;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 12px 25px;
+  border-radius: 50px;
+  transition: 0.3s;
+  border:none;
+  max-width: 100px;
+  justify-content: center;
+  }
+.menu__btn:hover{
+  background:darkred;
 }

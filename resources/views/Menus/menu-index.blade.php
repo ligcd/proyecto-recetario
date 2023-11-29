@@ -13,23 +13,21 @@
                 </a>
                 <p> <a href="{{route('menus.edit', $menu)}}" ><strong>Editar</strong> </a> 
                     <div>
-                                {{--<form action="{{ route('ingredientes.destroy', $ingrediente) }}" method="POST" id="delete-form">
-                                @csrf
-                                @method('DELETE')
-                                <br>
-                                <button type="button" class="btn btn-danger" style="background-color:#CE1212;border-radius:20px;" onclick="mostrarConfirmacion()">
-                                    <i class="bi bi-trash"></i> Borrar
-                                </button>
-                            </form>--}}
-                          
-                            <script>
-                                function mostrarConfirmacion() {
-                                    if (confirm('¿Estás seguro de que deseas borrar este ingrediente?')) {
-                                        document.getElementById('delete-form').submit();
-                                    }
+                        <form action="{{ route('menus.destroy', $menu) }}" method="POST" id="delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <br>
+                            <button type="button" class="btn btn-danger" style="background-color:#CE1212;border-radius:20px;" onclick="mostrarConfirmacion()">
+                                <i class="bi bi-trash"></i> Borrar
+                            </button>
+                        </form>                          
+                        <script>
+                            function mostrarConfirmacion() {
+                                if (confirm('¿Estás seguro de que deseas borrar este menu?')) {
+                                    document.getElementById('delete-form').submit();
                                 }
-                            </script>
-                        </a>
+                            }
+                        </script>
                     </div>
 
                     <table class="table">

@@ -25,9 +25,10 @@
                 <li><a href="{{ url('/menus') }}">Menú Semanal</a></li>
                 @auth
                     <li><a href="{{ url('/inicio') }}">Mis recetas</a></li>
-                    <li class="dropdown" ><a href="#"><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <li class="dropdown" ><a href="{{ url('/inicio') }}"><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="{{ route('profile.show') }}">{{ __('Perfil') }}</a></li>
+                            <li><a href="{{ url('/inicio') }}">Perfil</a></li>
+                            <li><a href="{{ route('profile.show') }}">{{ __('Configuración') }}</a></li>
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
                                 <li><button class="button-logout" href="{{ route('logout') }}"

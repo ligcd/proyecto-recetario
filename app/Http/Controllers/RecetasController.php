@@ -52,7 +52,7 @@ class RecetasController extends Controller
     public function create()
     {
         $etiquetas = Etiqueta::all();
-        $recetaId = Ingredientes::all(); // O asigna el valor adecuado según tus necesidades.
+        $recetaId = Ingredientes::all(); 
         $procedimientos = Procedimiento::all();
     
         return view('recetas/formularioRecetas', compact('etiquetas', 'recetaId', 'procedimientos'));
@@ -181,7 +181,7 @@ class RecetasController extends Controller
     
     public function show(Recetas $receta)
     {
-        $comentarios = $receta->comentarios;
+        $comentarios = $receta->comentarios()->get();
         // Calcula el promedio de calificaciones
         $promedio = $comentarios->avg('calificacion');
 

@@ -44,11 +44,13 @@
 </head>
 
 <body>
+
+<x-navbar/>
   
   <main id="main">
 
     <section id="book-a-table" class="book-a-table">
-      <div class="container">
+      <div class="container" style="margin-top:50px">
         <!---Header--->
         <div class="section-header">
           <h2>Nueva receta</h2>
@@ -104,11 +106,11 @@
               </div>
 
               <!--Etiquetas-->
-              <div class="col-lg-12">
-                  <select id="etiquetas" name="etiqueta_id[]" multiple class="form-control" required>
+              <div class="col-lg-12" style="width: 100%">
+                  <select id="etiquetas" name="etiqueta_id[]" multiple class="form-control" required style="width: 100%">
                   <!-- Opciones de etiquetas existentes -->
                   @foreach ($etiquetas as $etiqueta)
-                    <option value="{{ $etiqueta->id }}" @selected( array_search($etiqueta->id, old('etiqueta_id') ?? []) !== false )>
+                    <option value="{{ $etiqueta->id }}" @selected( array_search($etiqueta->id, old('etiqueta_id') ?? []) !== false ) style="width: 100%">
                       {{ $etiqueta->etiqueta }}
                     </option>
                   @endforeach
@@ -227,6 +229,7 @@
 
      // Inicializar Select2 en el campo de etiquetas
     $("#etiquetas").select2({
+        width: '100%',
         tags: true,
         tokenSeparators: [',', ' '], // Permitir separar etiquetas por coma o espacio
         placeholder: "Selecciona o crea etiquetas",

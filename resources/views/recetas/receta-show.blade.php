@@ -1,14 +1,5 @@
 <x-deliny-layout>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JS (Popper.js is required for Bootstrap) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="hero d-flex align-items-center section-bg">
         <div class="container">
@@ -140,6 +131,11 @@
         </div>
         <input type="hidden" name="recetas_id" value="{{ $receta->id }}">
     <button type="submit" style="display: inline-block; padding: 10px 20px; background-color: red; color: white; border: none; border-radius: 20px; cursor: pointer;">Enviar comentario</button>
+    @if(session('success'))
+      <div class="alert alert-success" style="width: auto; margin-top:20px;">
+        {{ session('success') }}
+      </div>
+    @endif
     </form>
   </div>
 </section><!-- End COMENTARIOS -->
@@ -227,11 +223,16 @@
                     </div>
                   </div>
                   <!-- Modal -->
-                  <form action="{{ route('comentarios.destroy', $c->id) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="delete-button">Borrar comentario</button>
-                  </form>
+                  <div>
+                    <form action="{{ route('comentarios.destroy', $c->id) }}" method="POST" id="delete-form">
+                        @csrf
+                        @method('DELETE')
+                        <br>
+                        <button type="button" class="delete-button" onclick="mostrarConfirmacion()">
+                          <i class="bi bi-trash"></i> Borrar comentario
+                        </button>
+                    </form>                          
+                </div>
                 </div>
             </div>
         </li>
@@ -239,18 +240,27 @@
 </ul>
 
 <script>
-  $('#editarComentarioModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var comentarioId = button.data('id');
-    
-    // Asignar el ID del comentario al campo oculto dentro del modal
-    $('#comentarioId').val(comentarioId);
-    console.log(comentarioId);
+  function mostrarConfirmacion() {
+      if (confirm('¿Estás seguro de que deseas borrar este comentario?')) {
+          document.getElementById('delete-form').submit();
+      }
+  }
 
-    // Modificar el action del formulario con el nuevo ID del comentario
-     $('#formComentario').attr('action', '{{ route('comentarios.update', '') }}/' + comentarioId);
+  $(document).ready(function() {
+      $('#editarComentarioModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget);
+          var comentarioId = button.data('id');
+
+          // Asignar el ID del comentario al campo oculto dentro del modal
+          $('#comentarioId').val(comentarioId);
+          console.log(comentarioId);
+
+          // Modificar el action del formulario con el nuevo ID del comentario
+          $('#formComentario').attr('action', '{{ route('comentarios.update', '') }}/' + comentarioId);
+      });
   });
 </script>
+
 
   </main><!-- End #main -->
 
@@ -302,7 +312,7 @@
       </div>
     </div>
 
-  </footer><!-- End Footer -->
+  </footer>
   <!-- End Footer -->
 
 </x-deliny-layout>

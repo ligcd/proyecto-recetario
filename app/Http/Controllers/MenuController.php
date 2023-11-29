@@ -39,6 +39,10 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|regex:/^[\pL\s\-]+$/u|max:150',
+        ]);
+
         $user_id = Auth::id(); // Obtener el ID del usuario autenticado
 
         $menu = Menu::create([
@@ -88,6 +92,10 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
+        $request->validate([
+            'nombre' => 'required|regex:/^[\pL\s\-]+$/u|max:150',
+        ]);
+        
         $menu->update([
             'nombre' => $request->input('nombre')
         ]);

@@ -8,7 +8,7 @@
     <section id="recetas" class="about" style="background-color: #fbfbfb">
         <div class="container aos-init aos-animate" data-aos="fade-up">
             <br><br>
-            <div class="section-header">
+            <div class="section-headerp">
                 <h2>Recetas</h2>
                 <p>Recetas <span>Creadas</span></p>
             </div>
@@ -69,7 +69,7 @@
                 </div>
                 @endforeach
             </ul>
-            <div class="section-header">
+            <div class="section-headerp">
                 <h2>Menús</h2>
                 <p>Menús <span>Creados</span></p>
             </div>

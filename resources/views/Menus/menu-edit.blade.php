@@ -3,21 +3,23 @@
 
     <main id="main">
         <!-- ======= Book A Table Section ======= -->
-        <section id="book-a-table" class="book-a-table">
-            <div class="container" data-aos="fade-up">
+            <div class="container" style="margin-top: 100px; padding:auto" data-aos="fade-up">
       
-              <div class="row g-0">
+              <div class="menu g-0">
          
-                <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
+                <div class="col-lg-8 d-flex">
                   <form action="{{ route('menus.update', $menu) }}" method="POST" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
                     @csrf
                     @method('PATCH')
-                    <div class="row gy-4">
+                    <div class="row gy-4" style="justify-content: center;">
                       <div class="section-header">
                         <p style="font-size:50px;">Crear <span>Menu</span></p>
                     </div>
                     <div class="col-lg-12">
                         <input type="text" name="nombre" class="form-control" placeholder="Nombre del menú" value="{{$menu->nombre}}">
+                        @error('nombre')
+                            <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
+                        @enderror
                         <div class="validate"></div>
                     </div>
                     <div class="col-md-12">
@@ -44,8 +46,8 @@
                                     <td>{{ $dia }}</td>
                                     @foreach ($tiposComida as $tipo)
                                     <td>
-                                        <select name="recetas[{{ $dia }}][{{ $tipo }}]">
-                                            <option value="">Selecciona un {{ $tipo }}</option>
+                                        <select name="recetas[{{ $dia }}][{{ $tipo }}]" class="form-select">
+                                            <option value="">{{ $tipo }}s</option>
                                             @foreach(${'recetas' . $tipo} as $receta)
                                             <option value="{{ $receta->id }}"
                                                 @foreach ($menu->recetas as $recetaMenu)
@@ -65,8 +67,7 @@
                         </table>
                     
                     </div>
-
-                    <div class="text-center"><button type="submit">Guardar Cambios</button></div>
+                    <div class="text-center"><button type="submit" class="menu__btn">Guardar</button></div>
                   </form>
 
                 </div>
@@ -74,7 +75,7 @@
               </div>
 
             </div>
-          </section>
+
       </main>
 
 </x-deliny-layout>
