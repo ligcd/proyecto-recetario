@@ -189,9 +189,13 @@
 
                 <!-- Agrega enlaces para editar y eliminar -->
                 <div class="actions">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarComentarioModal" data-id="{{ $c->id }}">
-                    Editar Comentario
-                  </button>
+                  @auth
+                    @if(auth()->user()->id === $c->user_id)
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarComentarioModal" data-id="{{ $c->id }}">
+                        Editar Comentario
+                      </button>
+                    @endif
+                  @endauth
                   <div class="modal fade" id="editarComentarioModal" tabindex="-1" role="dialog" aria-labelledby="editarComentarioModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -228,15 +232,19 @@
                   </div>
                   <!-- Modal -->
                   <div>
-                    <form action="{{ route('comentarios.destroy', $c->id) }}" method="POST" id="delete-form">
-                        @csrf
-                        @method('DELETE')
-                        <br>
-                        <button type="button" class="delete-button" onclick="mostrarConfirmacion()">
-                          <i class="bi bi-trash"></i> Borrar comentario
-                        </button>
-                    </form>                          
-                </div>
+                    @auth
+                      @if(auth()->user()->id === $c->user_id)
+                        <form action="{{ route('comentarios.destroy', $c->id) }}" method="POST" id="delete-form">
+                          @csrf
+                          @method('DELETE')
+                          <br>
+                          <button type="button" class="delete-button" onclick="mostrarConfirmacion()">
+                            <i class="bi bi-trash"></i> Borrar comentario
+                          </button>
+                        </form>
+                      @endif
+                    @endauth                        
+                  </div>
                 </div>
             </div>
         </li>
