@@ -149,20 +149,20 @@ class RecetasController extends Controller
         for ($i = 0; $i < $numeroProcedimientos; $i++) {
             $procedimiento = new Procedimiento();
 
-            /*$validator = Validator::make([
-                'nombre' => $ingredientesNombres[$i],
-                'cantidad' => $ingredientesCantidades[$i],
-                'unidadMedida' => $ingredientesUnidades[$i],
+            $validator = Validator::make([
+                'procedimiento' => $procedimientoDescripcion[$i],
+                'archivoProcedimiento' => $archivoProcedimientoUbicacion[$i],
             ], [
-                'nombre' => 'required|regex:/^[\pL\s\-]+$/u|max:150',
-                'cantidad' => 'required|numeric|min:0',
-                'unidadMedida' => 'nullable', // Acepta un valor nulo (opcional)
+                
+                'archivoProcedimiento' => 'required|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+                'procedimiento' => 'required|max:10000',
+                
             ]);
 
             if ($validator->fails()) {
                 // Manejar la validación fallida aquí
                 return redirect()->back()->withErrors($validator)->withInput();
-            }*/
+            }
 
             $archivosProcedimientoUbicacion = $archivoProcedimientoUbicacion[$i]->store('public/img_recetas/procedimientos');
 
@@ -202,7 +202,9 @@ class RecetasController extends Controller
         // Obtener los ingredientes de la receta
         $ingredientes = $receta->ingredientes;
 
-        return view('recetas.recetas-edit', compact('receta', 'etiquetas', 'ingredientes'));
+        $procedimientos = $receta->procedimientos;
+
+        return view('recetas.recetas-edit', compact('receta', 'etiquetas', 'ingredientes', 'procedimientos'));
     }
 
     /**
@@ -239,6 +241,10 @@ class RecetasController extends Controller
         $ingredientesCantidades = $request->input('cantidad', []);
         $ingredientesUnidades = $request->input('unidadMedida', []);
 
+        // Antes de actualizar ingredientes, eliminar los existentes
+        $receta->ingredientes()->delete();
+
+
         foreach ($ingredientesNombres as $index => $nombre) {
             $receta->ingredientes()->create([
                 'nombre' => $nombre,
@@ -246,6 +252,21 @@ class RecetasController extends Controller
                 'unidadMedida' => $ingredientesUnidades[$index],
             ]);
         }
+
+            // Actualizar procedimientos
+        $procedimientoIds = $request->input('procedimiento_id', []);
+        $procedimientoDescripciones = $request->input('procedimiento', []);
+        $archivoProcedimientoUbicaciones = $request->file('archivoProcedimiento', []);
+
+        foreach ($procedimientoIds as $index => $procedimientoId) {
+            Procedimiento::updateOrCreate(
+                ['id' => $procedimientoId],
+                [
+                    'procedimiento' => $procedimientoDescripciones[$index],
+                    'archivo_ubicacion' => $request->hasFile('archivoProcedimiento') ? $archivoProcedimientoUbicaciones[$index]->store('public/img_recetas/procedimientos') : $procedimiento->archivo_ubicacion,
+                ]
+            );
+        }        
 
         
         return redirect()->route('recetas.index');

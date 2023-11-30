@@ -1,49 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$receta->titulo}}</title>
-
-    <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon">
-    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="/assets/css/main.css" rel="stylesheet">
-
-    <!-- Incluir estilos y scripts de Select2 -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-    <!---
-    =======================================================
-    * Template Name: Yummy
-    * Updated: Sep 18 2023 with Bootstrap v5.3.2
-    * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
-</head>
-<body>
+<x-deliny-layout>
   <main id="main">
     <!-- ======= Book A Table Section ======= -->
     <section id="book-a-table" class="book-a-table">
-      <div class="container">
+      <div class="container" style="margin-top:50px">
 
         <div class="section-header">
           <h2>Edita tu receta</h2>
@@ -61,8 +20,7 @@
               
               <!--Cambiar titulo-->
               <div class="col-lg-12">
-                <input type="text" name="titulo" class="form-control" placeholder="Nombre del platillo"value="{{$receta->titulo}}" >
-                <div class="validate"></div>
+                <input type="text" name="titulo" class="form-control" placeholder="Nombre del platillo"value="{{$receta->titulo}}" required>
               </div>
               
               <!--Cambiar imagen-->
@@ -72,7 +30,7 @@
 
               <!--Cambiar tipo de comida-->
               <div class="col-lg-12">
-                <select name="tipoComida" class="form-control">
+                <select name="tipoComida" class="form-control" style="color: #595C5f; font-size: 14px;" required>
                     <option value="Desayuno" @if($receta->tipoComida === 'Desayuno') selected @endif>Desayuno</option>
                     <option value="Almuerzo" @if($receta->tipoComida === 'Almuerzo') selected @endif>Almuerzo</option>
                     <option value="Comida" @if($receta->tipoComida === 'Comida') selected @endif>Comida</option>
@@ -84,8 +42,7 @@
 
               <!--Cambiar descripcion--> 
               <div class="form-group mt-3">
-                <textarea class="form-control" name="descripcion" rows="2" placeholder="Describe el platillo">{{$receta->descripcion}}</textarea>
-                <div class="validate"></div>
+                <textarea style="resize: none;" class="form-control" name="descripcion" rows="2" placeholder="Describe el platillo" required>{{$receta->descripcion}}</textarea>
               </div>
 
               <!--Cambiar etiquetas-->
@@ -93,7 +50,7 @@
                   <select id="etiquetas" name="etiqueta_id[]" multiple class="form-control" required>
                   <!-- Opciones de etiquetas existentes -->
                   @foreach ($etiquetas as $etiqueta)
-                    <option value="{{ $etiqueta->id }}" @if(in_array($etiqueta->id, old('etiqueta_id', $receta->etiquetas->pluck('id')->toArray()) ?? [])) selected @endif>
+                    <option style="width: 100%;" value="{{ $etiqueta->id }}" @if(in_array($etiqueta->id, old('etiqueta_id', $receta->etiquetas->pluck('id')->toArray()) ?? [])) selected @endif>
                       {{ $etiqueta->etiqueta }}
                     </option>
                   @endforeach
@@ -113,7 +70,7 @@
               
                 <!--Nombre del ingrediente-->
                 <div class="col-md-4">
-                  <input type="text" name="nombre[]" class="form-control" id="nombre" placeholder="Nombre del Ingrediente" value="{{ $ingrediente->nombre }}" >
+                  <input type="text" name="nombre[]" class="form-control" id="nombre" placeholder="Nombre del Ingrediente" value="{{ $ingrediente->nombre }}" required>
                   @error('nombre.*')
                     <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
                   @enderror
@@ -121,7 +78,7 @@
 
                 <!--Cantidad del ingrediente-->
                 <div class="col-md-4">
-                  <input type="number" class="form-control" name="cantidad[]" step="0.100" id="cantidad" placeholder="Cantidad" value="{{ $ingrediente->cantidad }}">
+                  <input type="number" class="form-control" name="cantidad[]" step="0.100" id="cantidad" placeholder="Cantidad" value="{{ $ingrediente->cantidad }}" required>
                   @error('cantidad.*')
                     <div class="error" style="color:#CE1212; margin-left: 15px; font-size:13px;">{{ $message }}</div>
                   @enderror
@@ -154,9 +111,26 @@
               <div class="section-header">
                 <p style="font-size:50px;">Agregar <span>Procedimiento</span></p>
               </div>
-              <textarea class="form-control" name="procedimiento" rows="10" placeholder="Describe el procedimiento de elaboración del platillo">{{ $receta->procedimiento }}</textarea>
-              <div class="validate"></div>
+              @foreach($receta->procedimientos as $procedimiento)
+                <div class="row gy-0 procedimiento-bloque php-email-form" style="padding:0;">
+                  <p>Paso</p>
+                  <textarea class="form-control" name="procedimiento[]" rows="5" placeholder="Describe el procedimiento de elaboración del platillo" required>{{ $procedimiento->procedimiento }}</textarea>
+                  <div class="add-ingredient row gy-0">   
+                    <div class="option-procedimiento">
+                      <div>               
+                        <label style="font-size: 12px; color: #ce1212;">Ilustra tu paso con una imagen</label>
+                        <input type="file" name="archivoProcedimiento[]" class="form-control"  onchange="mostrarImagen(this)" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="add-ingredient">
+                  <button type="button"  id="btnAgregarOtroProce">
+                    <i class="bi bi-plus"></i>Agregar otro paso</button>
+                </div>
+              @endforeach
             </div>
+
 
               <div class="text-center"><button type="submit">Guardar</button></div>
             </div>
@@ -178,6 +152,12 @@
     $("#btnAgregarOtroIngrediente").click(function () {
       // Clonar la última sección de ingredientes y agregarla después
       $(".ingrediente-bloque:last").clone().insertAfter(".ingrediente-bloque:last");
+    });
+
+    // Manejar el clic en el botón "Agregar otro paso"
+    $("#btnAgregarOtroProce").click(function () {
+      // Clonar la última sección de procedimientos y agregarla después
+      $(".procedimiento-bloque:last").clone().insertAfter(".procedimiento-bloque:last");
     });
 
      // Inicializar Select2 en el campo de etiquetas
@@ -207,4 +187,4 @@
       }
   }
 </script>
-</html>
+</x-deliny-layout>

@@ -1,52 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Nueva receta</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="/assets/img/favicon.png" rel="icon">
-  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="/assets/css/main.css" rel="stylesheet">
-
-      <!-- Incluir estilos y scripts de Select2 -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-  <!-- =======================================================
-  * Template Name: Yummy
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
-
-<x-navbar/>
+<x-deliny-layout>
   
   <main id="main">
 
@@ -84,7 +36,7 @@
 
               <!--Tipo de comida-->
               <div class="col-lg-12">
-                <select name="tipoComida" class="form-control" style="color: #595C5f; font-size: 14px;" required>
+                <select name="tipoComida" class="form-control" style="color: #595C5f; font-size: 14px; " required>
                   <option value="">Selecciona el tipo de platillo</option>
                   <option value="Desayuno">Desayuno</option>
                   <option value="Almuerzo">Almuerzo</option>
@@ -179,7 +131,7 @@
                 <p style="font-size:50px;">Agregar <span>Procedimiento</span></p>
               </div>
               <div class="row gy-0 procedimiento-bloque php-email-form" style="padding:0;">
-                <p>Paso numero </p>
+                <p>Paso</p>
                 <textarea class="form-control" name="procedimiento[]" rows="5" placeholder="Describe el procedimiento de elaboración del platillo" required></textarea>
                 <div class="add-ingredient row gy-0">   
                   <div class="option-procedimiento">
@@ -296,8 +248,4 @@
         }
     }
 </script>
-
-
-
-
-</html>
+</x-deliny-layout>

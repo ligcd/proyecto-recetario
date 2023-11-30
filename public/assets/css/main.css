@@ -1684,6 +1684,20 @@ section {
   border-radius: 10px;
 }
 
+.bttn-option{
+  text-decoration: none;
+  background-color: #870707;
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.bttn-option:hover{
+  background-color: #ce1818;
+}
+
 /*--------------------------------------------------------------
 # Events Section
 --------------------------------------------------------------*/
@@ -1979,7 +1993,6 @@ section {
   box-shadow: none;
   font-size: 14px;
   border-radius: 0;
-  padding: 12px 15px;
 }
 
 .book-a-table .php-email-form input:focus,

@@ -9,6 +9,17 @@
           <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
             <h2 data-aos="fade-up" class="aos-init aos-animate">{{$receta->titulo}}</h2>
             <p data-aos="fade-up" data-aos-delay="100" class="aos-init aos-animate">{{$receta->descripcion}}</p>
+            <div>
+              <p style="color: white; font-size: 24px; font-weight: bold;">
+                @for ($i = 1; $i <= 5; $i++)
+                  @if ($i <= $promedio)
+                    <i class="fas fa-star" style="color: goldenrod;"></i>
+                  @else
+                    <i class="far fa-star" style="color: goldenrod;"></i>
+                  @endif
+                @endfor
+              </p>
+            </div>
             <div class="etiquetas">
               <ul>
                   @foreach ($receta->etiquetas as $etiqueta)
@@ -23,6 +34,8 @@
             <a href="{{ route('recetaimg.descarga', $receta) }}">
               <img src="{{ \Storage::url($receta->archivo_ubicacion) }}" alt="{{ $receta->titulo }}" class="img-fluid aos-init aos-animate" data-aos="zoom-out" data-aos-delay="300">
             </a>
+            <div class="add-ingredient"><a href="{{ route('recetas.descargar-pdf', $receta) }}">Descargar receta</a></div>
+
           </div>
           
         </div>
@@ -30,7 +43,6 @@
     </section>
 
     <section id="ingrediente-procedimiento" class="about">
-      <a href="{{ route('recetas.descargar-pdf', $receta) }}" class="btn btn-primary">Descargar PDF</a>
       <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section-header">
           <p>Ingredientes<span>:</span></p>
@@ -58,27 +70,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Mostrar el promedio de calificaciones sin fondo de imagen -->
-    <div class="container" data-aos="zoom-out">
-    <div class="row gy-4">
-        <div class="text-center">
-            <span style="font-weight: bold; font-size: 30px; color: #ffffff;">Promedio y Estrellas</span>
-        </div>
-    </div>
-
-    <div style="padding: 20px; border-radius: 10px; margin-top: 20px; background-color: #333; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">
-        <p style="color: white; font-size: 24px; font-weight: bold;">Calificación promedio según usuarios: {{ $promedio }}</p>
-        <p style="color: white; font-size: 24px; font-weight: bold;">
-            @for ($i = 1; $i <= 5; $i++)
-                @if ($i <= $promedio)
-                    <i class="fas fa-star" style="color: goldenrod;"></i>
-                @else
-                    <i class="far fa-star" style="color: goldenrod;"></i>
-                @endif
-            @endfor
-        </p>
-    </div>
 </div>
 
   <section id="why-us" class="why-us section-bg">
@@ -125,7 +116,7 @@
         <div class="form-group">
             <label style="font-weight: bold; color: #ffffff;" for="calificacion">Calificación:</label>
             <select name="calificacion" id="calificacion" class="form-control" required>
-              <option value=""></option>
+              <option value="">Ranquea la receta</option>
               <option value="5">Excelente</option>
               <option value="4">Muy bueno</option>
               <option value="3">Bueno</option>
@@ -134,12 +125,12 @@
             </select>
         </div>
         <input type="hidden" name="recetas_id" value="{{ $receta->id }}">
-    <button type="submit" style="display: inline-block; padding: 10px 20px; background-color: red; color: white; border: none; border-radius: 20px; cursor: pointer;">Enviar comentario</button>
-    @if(session('success'))
-      <div class="alert alert-success" style="width: auto; margin-top:20px;">
-        {{ session('success') }}
-      </div>
-    @endif
+        <div class="d-flex" style="justify-content: right;"><button class="mt-3" type="submit" style="display: inline-block; padding: 10px 20px; background-color: red; color: white; border: none; border-radius: 20px; cursor: pointer;">Enviar comentario</button></div>
+        @if(session('success'))
+          <div class="alert alert-success" style="width: auto; margin-top:20px;">
+            {{ session('success') }}
+          </div>
+        @endif
     </form>
   </div>
 </section><!-- End COMENTARIOS -->
@@ -163,35 +154,39 @@
 <ul class="comment-list">
     @foreach ($receta->comentarios as $c)
         <li class="comment-item">
-            <div style="background-color: white; border-radius: 10px; padding: 20px; margin: 10px; text-align: center;">
+            <div style="background-color: white; border-radius: 10px; padding: 20px; margin: 10px;">
                 <div class="testimonial-content">
-                    <p>
+                    <!-- Muestra el nombre del usuario -->
+                    <div class="d-flex justify-content-between">
+                      <p style="color: #ce1212; text-transform: uppercase;"><b>{{ $c->user->name }}</b></p>
+                      <!-- Agrega estrellas basadas en la calificación -->
+                      <div class="stars">
+                          @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $c->calificacion)
+                              <i class="bi bi-star-fill" style="color: #ce1212;"></i>
+                            @else
+                              <i class="bi bi-star" style="color: #ce1212;"></i>
+                            @endif
+                          @endfor
+                      </div>
+                    </div>
+                    
+                    <p class="text-center">
                         <i class="bi bi-quote quote-icon-left"></i>
                         {{ $c->comentario }}
                         <i class="bi bi-quote quote-icon-right"></i>
                     </p>
 
-                    <!-- Agrega estrellas basadas en la calificación -->
-                    <div class="stars">
-                        @for ($i = 1; $i <= 5; $i++)
-                          @if ($i <= $c->calificacion)
-                            <i class="bi bi-star-fill"></i>
-                          @else
-                            <i class="bi bi-star"></i>
-                          @endif
-                        @endfor
-                        <p>Calificación: {{ $c->calificacion }} estrellas</p>
-                    </div>
 
-                    <!-- Muestra el nombre del usuario -->
-                    <p>Usuario: {{ $c->user->name }}</p>
+
+                    
                 </div>
 
                 <!-- Agrega enlaces para editar y eliminar -->
-                <div class="actions">
+                <div class="actions d-flex align-items-center justify-content-between mt-5">
                   @auth
                     @if(auth()->user()->id === $c->user_id)
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarComentarioModal" data-id="{{ $c->id }}">
+                      <button type="button" class="bttn-option" data-toggle="modal" data-target="#editarComentarioModal" data-id="{{ $c->id }}">
                         Editar Comentario
                       </button>
                     @endif
@@ -237,8 +232,7 @@
                         <form action="{{ route('comentarios.destroy', $c->id) }}" method="POST" id="delete-form">
                           @csrf
                           @method('DELETE')
-                          <br>
-                          <button type="button" class="delete-button" onclick="mostrarConfirmacion()">
+                          <button type="button" class="bttn-option" onclick="mostrarConfirmacion()">
                             <i class="bi bi-trash"></i> Borrar comentario
                           </button>
                         </form>
@@ -275,57 +269,5 @@
 
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div>
-            <h4>Dirección</h4>
-            <p>
-              Guadalajara, Jalisco <br>
-              México<br>
-            </p>
-          </div>
-
-        </div>
-
-        <div class="col-lg-3 col-md-6 footer-links d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Contáctanos</h4>
-            <p>
-              <strong>Teléfono:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> contactodeliny@gmail.com<br>
-            </p>
-          </div>
-        </div>
-
-       
-
-        <div class="col-lg-3 col-md-6 footer-links">
-          <h4>Siguenos en redes</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-           
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Deliny</span></strong>. All Rights Reserved
-      </div>
-    </div>
-
-  </footer>
-  <!-- End Footer -->
-
 </x-deliny-layout>
 
