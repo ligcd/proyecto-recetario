@@ -1,17 +1,17 @@
 <x-deliny-layout>
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="hero d-flex align-items-center section-bg" style="background-image: url('assets/img/menu/fondo-comida.jpg');">
+<section id="hero" class="hero d-flex align-items-center section-bg" style="background-image: url('assets/img/menu/fondo-comida.jpg'); ">
   <div class="container">
     <div class="row justify-content-between gy-5">
       <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center text-center text-lg-start">
-        <h2 data-aos="fade-up" style="padding: 10px; border-radius: 20px; color: #fff;"><br>Deliny<span style="color: #FFD700;">.</span> 
+        <h2 data-aos="fade-up" style="padding: 10px; border-radius: 20px; color: #fff; background-color: #ce121213">Deliny<span style="color: #ce1212;">.</span> 
         Explora un mundo de sabores</h2>
         <p data-aos="fade-up" data-aos-delay="100" style="background-color: #F5F5DC; color: #333; font-size: 20px; padding: 15px; border-radius: 10px; margin-top: 10px;">
           ¡Explora un mundo de sabores en nuestro blog de comida, donde cada plato es una historia que te invitamos a saborear!
         </p>
         <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-          <a href="{{ route('recetas.index') }}" class="btn btn-primary" style="background-color: crimson; color: #fff;">¡Explora nuestras recetas!</a>
+          <a href="{{ route('recetas.index') }}" class="btn btn-primary" style="background-color: #ce1212; color: #fff; border:none;">¡Explora nuestras recetas!</a>
         </div>
       </div>
       <div class="col-lg-5 order-1 order-lg-2 d-flex align-items-center">
@@ -121,15 +121,15 @@
             trabajando para mejorar la página y que tú también la disfrutes al máximo. 
             Regístrate y obtén más beneficios de esta página web. Si ya tienes cuenta, ¡bienvenido de nuevo!
           </p>
-          <ul>
-            <li><i class="bi bi-check2-all"></i> Empieza a subir recetas y disfruta de las delicias existentes en Deliny </li>
+          <ul style="list-style: none;">
+            <li><i class="bi bi-check2-all" style="color: #ce1212;"></i> Empieza a subir recetas y disfruta de las delicias existentes en Deliny </li>
           </ul>
-          <p>
+          <p class="text-center">
             ¡Ingresa ya!
           </p>
           <div class="text-center">
-            <a href="{{route('recetas.create')}}" class="btn btn-primary" style="background-color: crimson; color: white; margin-right: 30px;">Inicia sesión</a>
-            <a href="{{route('recetas.create')}}" class="btn btn-primary" style="background-color: crimson; color: white;">Regístrate</a>
+            <a href="{{route('recetas.create')}}" class="btn btn-primary" style="background-color: #ce1212; color: #fff; border:none; margin-right: 30px;">Inicia sesión</a>
+            <a href="{{route('recetas.create')}}" class="btn btn-primary" style="background-color: #ce1212; color: #fff; border:none;">Regístrate</a>
           </div>
         </div>
       </div>
