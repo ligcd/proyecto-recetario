@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Recetas;
+use App\Models\Etiqueta;
+use App\Models\Ingredientes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
-
-use App\Models\Recetas;
-use App\Models\Etiqueta;
-use App\Models\Ingredientes;
 use App\Models\Procedimiento;
 
 class RecetasController extends Controller
@@ -176,8 +174,8 @@ class RecetasController extends Controller
             $procedimientos[] = $procedimiento;
         }        
 
-        return redirect()->route('inicio');
-
+        return view('inicio');
+    
         //return redirect()->route('ingredientes.create', ['recetaId' => $receta->id]);
     }
     

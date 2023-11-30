@@ -24,7 +24,8 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/inicio', [MenuController::class, 'inicio'])->middleware('auth','verified')->name('inicio');
+Route::get('/inicio', [MenuController::class, 'inicio'])->middleware('auth','verified');
+
 
 Route::get('recetaimg-descarga/{receta}', [RecetasController::class, 'descargar'])->name('recetaimg.descarga');
 
@@ -44,6 +45,9 @@ Route::resource('menus', MenuController::class)->middleware(['auth', 'verified']
 
 //Routhe::middleware->group(function()){}para aahrupar normas y agregarles el auth
 #en action="/comentario"> esto en formulario, dentro del action tiene que coincidir. 
+
+#Route::get('comentario/pdf', [ComentariosController::class, 'pdf'])->name('comentario.pdf');
+#Route::post('/', [ComentariosControllerntroller::class, 'create'])
 
 Route::middleware([
     'auth:sanctum',

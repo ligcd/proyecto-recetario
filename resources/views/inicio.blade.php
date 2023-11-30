@@ -12,7 +12,7 @@
                 <h2>Recetas</h2>
                 <p>Recetas <span>Creadas</span></p>
             </div>
-            @if(empty($recetas))
+            @if(count($recetas) === 0)
                 <div class="alert alert-info mt-3" role="alert">
                     Aún no hay recetas disponibles.
                 </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="container" data-aos="fade-up">
             <div class="row g-0">
-                @if(empty($menus))
+            @if(count($menus) === 0)
                 <div class="alert alert-info mt-3" role="alert">
                     Aún no has creado menús semanales.
                 </div>
