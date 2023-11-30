@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Recetas;
-use App\Models\Etiqueta;
-use App\Models\Ingredientes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Models\Recetas;
+use App\Models\Etiqueta;
+use App\Models\Ingredientes;
 use App\Models\Procedimiento;
 
 class RecetasController extends Controller
@@ -21,7 +23,7 @@ class RecetasController extends Controller
 #$this->middleware(['auth','verified'])->except('index','show'); 
      public function __construct()
      {
-       $this->middleware(['auth','verified'])->except('index','show');
+      $this->middleware(['auth','verified'])->except('index','show');
       } 
      
      public function index(Request $request)
@@ -174,8 +176,8 @@ class RecetasController extends Controller
             $procedimientos[] = $procedimiento;
         }        
 
-        return view('inicio');
-    
+        return redirect()->route('inicio');
+
         //return redirect()->route('ingredientes.create', ['recetaId' => $receta->id]);
     }
     
