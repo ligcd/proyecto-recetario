@@ -45,7 +45,6 @@
 
 <body>
 
-
 <x-navbar/>
   
   <main id="main">
@@ -58,7 +57,7 @@
           <p>Comparte tu <span>receta</span> con nosotros</p>
         </div>
         <!--Inicio del cuadro del formulario-->
-        <form action="/recetas" method="POST" class="row g-0" id="form-recetas" enctype="multipart/form-data">
+        <form action="/recetas" method="POST" class="row g-0" enctype="multipart/form-data">
           <div class="col-lg-4 reservation-img" style="background-image: url(/assets/img/recetario/nuevareceta.jpg);">
             <img id="imagenPrevia" src="#" alt="Vista previa de la imagen" style="display: none; width: 100%; height: 100%; "/>
           </div>
@@ -195,20 +194,16 @@
                   <i class="bi bi-plus"></i>Agregar otro paso</button>
               </div>
             </div>
-            <div class="text-center php-email-form" id="#btnPublicarReceta"><button type="submit">Publicar receta</button></div>
+            <div class="text-center php-email-form"><button type="submit">Publicar receta</button></div>
           </div>
-    
         </form>
       </div>
     </section>
     
   </main>
 
-
 </body>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 <script>
   $(document).ready(function () {
     // Ocultar la sección de ingredientes al cargar la página
@@ -239,42 +234,6 @@
         tokenSeparators: [',', ' '], // Permitir separar etiquetas por coma o espacio
         placeholder: "Selecciona o crea etiquetas",
     });
-
-
-    $("#btnPublicarReceta").click(function (event) {
-    event.preventDefault(); // Evitar la acción predeterminada del formulario
-
-    // Ejemplo de SweetAlert al hacer clic en "Publicar receta"
-    Swal.fire({
-      title: 'Publicar receta',
-      text: '¿Estás seguro de que deseas publicar esta receta?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, publicar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Si el usuario hace clic en "Sí, publicar", puedes enviar el formulario
-        $("form-recetas").unbind('submit').submit();
-      }
-    });
-  });
-
-  // Manejar la redirección exitosa y mostrar SweetAlert
-  $("#form-recetas").submit(function () {
-    // Código para enviar el formulario y guardar la receta aquí
-
-    // Mostrar SweetAlert después de haber guardado la receta con éxito
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Tu receta ha sido publicada",
-      showConfirmButton: false,
-      timer: 2000
-    });
-  });
-
-    
   });
 
    function mostrarImagen(input) {
@@ -296,8 +255,5 @@
         }
     }
 </script>
-
-
-
 
 </html>
