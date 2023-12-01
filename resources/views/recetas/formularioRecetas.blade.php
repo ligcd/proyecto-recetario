@@ -11,8 +11,8 @@
         </div>
         <!--Inicio del cuadro del formulario-->
         <form action="/recetas" method="POST" class="row g-0" id="form-recetas" enctype="multipart/form-data">
-          <div class="col-lg-4 reservation-img" style="background-image: url(/assets/img/recetario/nuevareceta.jpg);">
-            <img id="imagenPrevia" src="#" alt="Vista previa de la imagen" style="display: none; width: 100%; height: 100%; "/>
+          <div class="col-lg-4 reservation-img" style="background-image: url(/assets/img/recetario/nuevareceta.jpg); padding:0;">
+            <img id="imagenPrevia" src="#" alt="Vista previa de la imagen" style="display: none; width: 100%; height: 100%;"/>
           </div>
           <!---Formulario información general de la receta-->
           <div class="col-lg-8 d-flex align-items-center reservation-form-bg php-email-form">

@@ -212,6 +212,7 @@ class RecetasController extends Controller
      */
     public function update(Request $request, Recetas $receta)
     {
+
         $receta->titulo = $request->titulo;
         $receta->descripcion = $request->descripcion;
         $receta->tipoComida = $request->tipoComida;
@@ -253,20 +254,37 @@ class RecetasController extends Controller
             ]);
         }
 
-            // Actualizar procedimientos
-        $procedimientoIds = $request->input('procedimiento_id', []);
+        // Actualizar procedimientos
+        
         $procedimientoDescripciones = $request->input('procedimiento', []);
-        $archivoProcedimientoUbicaciones = $request->file('archivoProcedimiento', []);
 
-        foreach ($procedimientoIds as $index => $procedimientoId) {
-            Procedimiento::updateOrCreate(
-                ['id' => $procedimientoId],
-                [
-                    'procedimiento' => $procedimientoDescripciones[$index],
-                    'archivo_ubicacion' => $request->hasFile('archivoProcedimiento') ? $archivoProcedimientoUbicaciones[$index]->store('public/img_recetas/procedimientos') : $procedimiento->archivo_ubicacion,
-                ]
-            );
-        }        
+        // Verifica si hay archivosProcedimiento y asegúrate de que sea un array
+        if ($request->hasFile('archivoProcedimiento')) {
+            $archivosProcedimiento = $request->file('archivoProcedimiento');
+            
+            $archivoProcedimientoUbicaciones = [];
+
+            // Itera sobre cada archivo y almacena sus ubicaciones
+            foreach ($archivosProcedimiento as $index => $archivoProcedimiento) {
+                if ($archivoProcedimiento->isValid()) {
+                    $ubicacion = $archivoProcedimiento->store('public/img_recetas/procedimientos');
+                    $archivoProcedimientoUbicaciones[] = $ubicacion;
+                } else {
+                    // Manejar error de archivo no válido
+                    return redirect()->back()->with('error', 'Uno o más archivos proporcionados no son válidos.');
+                }
+            }
+        }
+
+        $receta->procedimientos()->delete();
+        foreach ($procedimientoDescripciones as $index => $procedimiento) {
+            $procedimiento = $receta->procedimientos()->create([
+                'procedimiento' => $procedimientoDescripciones[$index],
+                'archivo_ubicacion' => $archivoProcedimientoUbicaciones[$index], // Asignar la ubicación correcta
+            ]);
+        }
+        
+               
 
         
         return redirect()->route('recetas.index');

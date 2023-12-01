@@ -124,11 +124,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="add-ingredient">
+              @endforeach
+              <div class="add-ingredient">
                   <button type="button"  id="btnAgregarOtroProce">
                     <i class="bi bi-plus"></i>Agregar otro paso</button>
                 </div>
-              @endforeach
             </div>
 
 
