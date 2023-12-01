@@ -21,16 +21,16 @@
                     @foreach($recetas as $receta)
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
                             <div class="call-us d-flex flex-column justify-content-center align-items-center" style="background-color: #ffffff; border-radius: 10px;">
-                                <div class="d-flex justify-content-between" style="margin-bottom:1em; border-bottom: 1px solid #efefef; padding-bottom: 1em;">
-                                    <div style="margin-right: 5em;">
-                                        <i class="bi bi-person" style="background-color: #ce1212; color: #fff; padding:5px; padding-left: 8px; padding-right:8px; border-radius: 50%; font-size: 20px;"></i>
-                                        <a href="" style="color: black; margin-left: 3px; font-size: 18px">
-                                            <b>{{ $receta->user->name }}</b>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a href="" style="color: black; margin-right: 5px; color: #9b9b9b;">{{$receta->created_at->format('d/m/Y H:i')}} <i class="bi bi-clock"></i></a>
-                                    </div>
+                                 <!--- =========== Info de usuario y fecha =========== --->
+                                <div class="d-flex justify-content-between align-items-center user-date "style="margin-top:none">
+                                <div class="user">
+                                    <a href="">
+                                    <b>{{ $receta->user->name }}</b>
+                                    </a>
+                                </div>
+                                <div class="date">
+                                    <a href="">{{$receta->created_at->format('d/m/Y')}} <i class="bi bi-clock"></i></a>
+                                </div>
                                 </div>
                                 <h4 style="font-size: 25px">
                                     <a href="{{route('recetas.show', $receta->id)}}">
